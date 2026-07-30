@@ -1,1 +1,2644 @@
-
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="icon" type="image/x-icon" href="Admine.png">
+</head>
+<style>
+    :root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#222;
+    --shadow:rgba(0,0,0,.15);
+    --theme-color:#10b981;
+    --primary:var(--theme-color);
+    --primary-shadow:rgba(16,185,129,.35);
+}
+body.dark{
+    --bg:#121212;
+    --card:#1e1e1e;
+    --text:#fff;
+    --shadow:rgba(255,255,255,.08);
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma,sans-serif;
+}
+body{
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
+}
+.header{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    padding:40px;
+    flex-wrap:wrap;
+    position:sticky;
+    top:0;
+    z-index:999;
+    backdrop-filter:blur(10px);
+    background:var(--bg);
+    border-bottom:1px solid rgba(150,150,150,.2);
+}
+.card{
+    width:250px;
+    height:50px;
+    background:var(--card);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:15px;
+    font-size:28px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 8px 20px var(--shadow);
+}
+.card:hover{
+    background:var(--primary);
+    color:white;
+    transform:translateY(-8px);
+}
+.bigcard{
+    width:200px;
+    height:250px;
+    background:var(--card);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:15px;
+    font-size:28px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 8px 20px var(--shadow);
+}
+.bigcard:hover{
+    background:var(--shadow);
+    color:white;
+    transform:translateY(-8px);
+}
+.Students,
+.Exams,
+.Videos,
+.PAGE{
+    width:95%;
+    margin:35px auto;
+    padding:25px;
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:0 8px 20px var(--shadow);
+}
+.Students,
+.Exams,
+.Videos{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:25px;
+}
+.bigcard{
+    width:100%;
+    min-height:220px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+}
+.bigcard p{
+    font-size:22px;
+    font-weight:bold;
+    text-align:center;
+    margin-top:15px;
+}
+.bigcard button{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    background:var(--primary);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+.bigcard button:hover{
+    opacity:.9;
+    transform:scale(1.04);
+}
+.Students>button,
+.Exams>button,
+.Videos>button{
+    height:50px;
+    border:none;
+    border-radius:15px;
+    font-size:22px;
+    font-weight:bold;
+    background:var(--primary);
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+.Students>button:hover,
+.Exams>button:hover,
+.Videos>button:hover{
+    transform:scale(1.04);
+}
+.PAGE{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#themeBtn{
+    width:300px;
+}
+#PasswBtn{
+    width:300px;
+}
+::-webkit-scrollbar{
+    width:10px;
+}
+::-webkit-scrollbar-track{
+    background:var(--bg);
+}
+::-webkit-scrollbar-thumb{
+    background:var(--primary);
+    border-radius:20px;
+}
+@media(max-width:900px){
+    .header{
+        gap:15px;
+        padding:20px;
+    }
+    .card{
+        width:180px;
+        font-size:20px;
+    }
+    .bigcard{
+        min-height:200px;
+    }
+}
+@media(max-width:600px){
+    .header{
+        flex-direction:column;
+    }
+    .card{
+        width:100%;
+        max-width:350px;
+    }
+    #themeBtn{
+        width:100%;
+    }
+    #PasswBtn{
+        width:100%;
+    }
+}
+.active{
+    background:var(--primary) !important;
+    color:white !important;
+    transform:translateY(-6px);
+}
+.Search_Par{
+    grid-column:1/-1;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:18px;
+    margin-bottom:15px;
+    background:var(--bg);
+    border-radius:15px;
+    box-shadow:0 5px 15px var(--shadow);
+    flex-wrap:wrap;
+}
+.searchInput{
+    flex:1;
+    min-width:250px;
+    height:45px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    padding:0 15px;
+    font-size:18px;
+    background:var(--card);
+    color:var(--text);
+    box-shadow:0 2px 10px var(--shadow);
+    transition:.3s;
+}
+.searchInput:focus{
+    box-shadow:0 0 0 3px var(--primary);
+}
+.searchFilter{
+    height:45px;
+    min-width:120px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    background:var(--card);
+    color:var(--text);
+    padding:0 10px;
+    cursor:pointer;
+    box-shadow:0 2px 10px var(--shadow);
+}
+.refreshBtn{
+    height:45px;
+    padding:0 20px;
+    border:none;
+    border-radius:10px;
+    background:var(--primary);
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+.refreshBtn:hover{
+    transform:scale(1.05);
+}
+.counter{
+    margin-right:auto;
+    font-size:18px;
+    font-weight:bold;
+    color:var(--text);
+}
+.counter b{
+    color:var(--primary);
+}
+@media(max-width:700px){
+    .Search_Par{
+        flex-direction:column;
+        align-items:stretch;
+    }
+    .searchInput,
+    .searchFilter,
+    .refreshBtn{
+        width:100%;
+    }
+    .counter{
+        margin:0;
+        text-align:center;
+    }
+}
+.addBtn{
+    grid-column:1 / -1;
+    width:100%;
+    height:65px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    margin:10px 0 30px 0;
+    padding:0 20px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        color-mix(in srgb, var(--primary) 70%, white)
+    );
+    color:#fff;
+    font-size:24px;
+    font-weight:bold;
+    letter-spacing:.5px;
+    cursor:pointer;
+    transition:all .3s ease;
+    box-shadow:0 10px 25px var(--primary-shadow);
+}
+.addBtn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px var(--primary-shadow);
+    filter:brightness(1.08);
+}
+.addBtn:active{
+    transform:scale(.98);
+}
+body.dark .addBtn{
+    background:var(--primary);
+    box-shadow:0 10px 25px var(--primary-shadow);
+}
+body.dark .addBtn:hover{
+    box-shadow:0 15px 35px var(--primary-shadow);
+}
+.addBtn::before{
+    content:"➕";
+    font-size:28px;
+}
+@media (max-width:768px){
+    .addBtn{
+        height:58px;
+        font-size:20px;
+    }
+    .addBtn::before{
+        font-size:24px;
+    }
+}
+.themePicker{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+.themeColor{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    cursor:pointer;
+    transition:.3s;
+    border:4px solid transparent;
+}
+.themeColor:hover{
+    transform:scale(1.15);
+}
+.themeColor.active{
+    border-color:white;
+    box-shadow:0 0 0 3px var(--text);
+}
+.settingsBox{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:30px;
+}
+.addstudent{
+    width:500px;
+    max-width:95%;
+    margin:40px auto;
+    padding:30px;
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:0 10px 30px var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+.hide{
+    display: none;
+}
+.addstudent h2{
+    text-align:center;
+    color:var(--primary);
+}
+.addstudent input,
+.addstudent select{
+    width:100%;
+    height:50px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    padding:0 15px;
+    background:var(--bg);
+    color:var(--text);
+    font-size:18px;
+    box-shadow:0 3px 10px var(--shadow);
+}
+.addstudent input:focus,
+.addstudent select:focus{
+    outline:2px solid var(--primary);
+}
+.saveBtn{
+    height:55px;
+    border:none;
+    border-radius:12px;
+    background:var(--primary);
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+.saveBtn:hover{
+    transform:translateY(-3px);
+    filter:brightness(1.08);
+}
+.studentProfile{
+    width:90%;
+    max-width:900px;
+    margin:30px auto;
+    padding:25px;
+    background:var(--card);
+    color:var(--text);
+    border-radius:20px;
+    box-shadow:0 10px 25px var(--shadow);
+}
+.studentProfile h2{
+    text-align:center;
+    color:var(--primary);
+    margin-bottom:25px;
+}
+.studentInfo{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+.studentInfo div{
+    background:var(--bg);
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 3px 8px var(--shadow);
+}
+.examCard{
+    background:var(--bg);
+    border-radius:15px;
+    padding:18px;
+    margin:18px 0;
+    box-shadow:0 4px 12px var(--shadow);
+}
+.examHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+.progressBar{
+    width:100%;
+    height:16px;
+    background:#d6d6d6;
+    border-radius:20px;
+    overflow:hidden;
+}
+.progressFill{
+    height:100%;
+    border-radius:20px;
+    background:var(--primary);
+    transition:.4s;
+}
+.examPercent{
+    text-align:right;
+    margin-top:8px;
+    font-weight:bold;
+    color:var(--primary);
+}
+.videoCard{
+    background:var(--bg);
+    border-radius:15px;
+    padding:18px;
+    margin:18px 0;
+    box-shadow:0 4px 12px var(--shadow);
+}
+.videoHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+.videoHeader span:last-child{
+    background:var(--primary);
+    color:white;
+    padding:4px 12px;
+    border-radius:30px;
+    font-size:14px;
+}
+.videoCard{
+    background:var(--bg);
+    border-radius:15px;
+    padding:20px;
+    margin:20px 0;
+    box-shadow:0 4px 12px var(--shadow);
+}
+.videoHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    font-size:18px;
+    font-weight:bold;
+}
+.videoHeader span:last-child{
+    background:var(--primary);
+    color:#fff;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:15px;
+}
+.cpContainer{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:0;
+    direction:ltr;
+}
+.cpItem{
+    display:flex;
+    align-items:center;
+}
+.cpCircle{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#dc3545;
+    transition:.3s;
+}
+.studentButtons button img{
+    width:22px;
+    height:22px;
+    vertical-align:middle;
+    margin-left:6px;
+}
+.cpCircle.done{
+    background:#34c759;
+}
+.cpLine{
+    width:35px;
+    height:4px;
+    background:#dc3545;
+}
+.cpLine.done{
+    background:#34c759;
+}
+.cpItem:last-child .cpLine{
+    display:none;
+}
+.studentButtons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-top:30px;
+}
+.studentButtons button{
+    border:none;
+    border-radius:12px;
+    padding:12px 20px;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition:.3s;
+}
+.studentButtons button:hover{
+    transform:translateY(-3px);
+}
+.waBtn{
+    background:#25D366;
+}
+.msgBtn{
+    background:#0d6efd;
+}
+.editBtn{
+    background:#ff9800;
+}
+.deleteBtn{
+    background:#dc3545;
+}
+.backBtn{
+    background:#6c757d;
+}
+@media(max-width:700px){
+    .studentInfo{
+        grid-template-columns:1fr;
+    }
+    .videoHeader,
+    .examHeader{
+        flex-direction:column;
+        gap:8px;
+        align-items:flex-start;
+    }
+    .studentButtons button{
+        width:100%;
+    }
+}
+#loadingScreen{
+    position:fixed;
+    inset:0;
+    background:var(--bg);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    z-index:999999;
+    transition:.5s;
+}
+#loadingScreen.hide{
+    opacity:0;
+}
+.loader{
+    width:90px;
+    height:90px;
+    border:8px solid rgba(150,150,150,.2);
+    border-top:8px solid var(--primary);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+#loadingScreen h2{
+    color:var(--text);
+    font-size:24px;
+    font-weight:bold;
+}
+@keyframes spin{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+.editstudent{
+    width:500px;
+    max-width:95%;
+    margin:40px auto;
+    padding:30px;
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:0 10px 30px var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+.editstudent h2{
+    text-align:center;
+    color:var(--primary);
+}
+.editstudent input,
+.editstudent select{
+    width:100%;
+    height:50px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    padding:0 15px;
+    background:var(--bg);
+    color:var(--text);
+    font-size:18px;
+    box-shadow:0 3px 10px var(--shadow);
+}
+.editstudent input:focus,
+.editstudent select:focus{
+    outline:2px solid var(--primary);
+}.addvideo{
+    width:95%;
+    max-width:1500px;
+    margin:40px auto;
+    padding:30px;
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:0 10px 30px var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+.addvideo h2{
+    text-align:center;
+    color:var(--primary);
+}
+.addvideo input,
+.addvideo select{
+    width:100%;
+    height:50px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    padding:0 15px;
+    background:var(--bg);
+    color:var(--text);
+    font-size:18px;
+    box-shadow:0 3px 10px var(--shadow);
+}
+.addvideo input:focus,
+.addvideo select:focus{
+    outline:2px solid var(--primary);
+}.videoForm{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:30px;
+    align-items:start;
+}
+.videoInputs{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+.videoPreview{
+    background:var(--bg);
+    border-radius:18px;
+    padding:15px;
+    box-shadow:0 5px 20px var(--shadow);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:650px;
+}
+.videoPreview iframe{
+    width:100%;
+    height:620px;
+    border:none;
+    border-radius:15px;
+}
+#Video_Thumbnail{
+    width:100%;
+    max-width:350px;
+    border-radius:15px;
+    display:none;
+    box-shadow:0 5px 20px var(--shadow);
+}
+.duration-inputs{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.duration-inputs input{
+    flex:1;
+    text-align:center;
+}
+.duration-inputs span{
+    font-size:25px;
+    font-weight:bold;
+}
+@media(max-width:1100px){
+    .videoForm{
+        grid-template-columns:1fr;
+    }
+    .videoPreview{
+        min-height:400px;
+    }
+    .videoPreview iframe{
+        height:400px;
+    }
+}
+#YoutubeVideos{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    gap:20px;
+}
+.YoutubeCard{
+    background:var(--shadow);
+    border-radius:15px;
+    overflow:hidden;
+}
+.YoutubeCard img{
+    width:100%;
+    display:block;
+}
+.YoutubeCard h3{
+    padding:15px;
+    font-size:17px;
+    height:70px;
+    overflow:hidden;
+}
+.YoutubeCard button{
+    width:90%;
+    margin:10px auto 20px;
+    display:block;
+}
+.YoutubeCard button{
+    width:90%;
+    height:48px;
+    margin:15px auto 20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    border:none;
+    border-radius:12px;
+    background:var(--primary);
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 6px 15px var(--primary-shadow);
+}
+.YoutubeCard button::before{
+    content:"🎥";
+}
+.YoutubeCard button:hover{
+    transform:translateY(-3px);
+    filter:brightness(1.08);
+}
+.YoutubeCard button:active{
+    transform:scale(.97);
+}
+body.dark .YoutubeCard button{
+    box-shadow:0 6px 15px rgba(0,0,0,.45);
+}
+.YoutubeCard img{
+    width:100%;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    display:block;
+}
+.videoProfile{
+    width:95%;
+    max-width:1400px;
+    margin:35px auto;
+    padding:30px;
+    background:var(--card);
+    color:var(--text);
+    border-radius:20px;
+    box-shadow:0 10px 30px var(--shadow);
+}
+.videoProfile h2{
+    text-align:center;
+    color:var(--primary);
+    margin-bottom:30px;
+}
+.videoBanner{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-bottom:30px;
+}
+.videoBanner iframe{
+    width:100%;
+    height:650px;
+    border:none;
+    border-radius:20px;
+    background:#000;
+    box-shadow:0 10px 25px var(--shadow);
+}
+.videoInfo{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+.videoInfo div{
+    background:var(--bg);
+    padding:18px;
+    border-radius:15px;
+    box-shadow:0 5px 15px var(--shadow);
+}
+.videoInfo b{
+    display:block;
+    color:var(--primary);
+    margin-bottom:10px;
+    font-size:18px;
+}
+.videoInfo p{
+    font-size:18px;
+    word-break:break-word;
+}
+.videoInfo a{
+    color:var(--primary);
+    text-decoration:none;
+    font-weight:bold;
+    word-break:break-all;
+}
+.videoInfo a:hover{
+    text-decoration:underline;
+}
+.cpPreview{
+    background:var(--bg);
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:30px;
+    box-shadow:0 5px 15px var(--shadow);
+}
+.cpPreview h3{
+    text-align:center;
+    color:var(--primary);
+    margin-bottom:20px;
+}
+.cpPreview .cpContainer{
+    justify-content:center;
+    flex-wrap:wrap;
+}
+.studentButtons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
+.studentButtons button{
+    min-width:180px;
+}
+@media(max-width:900px){
+    .videoBanner iframe{
+        height:420px;
+    }
+}
+@media(max-width:700px){
+    .videoInfo{
+        grid-template-columns:1fr;
+    }
+    .videoBanner iframe{
+        height:250px;
+    }
+    .studentButtons button{
+        width:100%;
+    }
+}
+.editvideo{
+    width:700px;
+    max-width:95%;
+    margin:40px auto;
+    padding:30px;
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:0 10px 30px var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    animation:fadeUp .35s ease;
+}
+.editvideo h2{
+    text-align:center;
+    color:var(--primary);
+    font-size:30px;
+    margin-bottom:10px;
+}
+.editvideo input,
+.editvideo select{
+    width:100%;
+    height:55px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    padding:0 18px;
+    background:var(--bg);
+    color:var(--text);
+    font-size:18px;
+    box-shadow:0 3px 10px var(--shadow);
+    transition:.25s;
+}
+.editvideo input:focus,
+.editvideo select:focus{
+    outline:2px solid var(--primary);
+    transform:translateY(-2px);
+}
+#Each_edit_CP_After{
+    padding:15px;
+    background:var(--bg);
+    border-radius:12px;
+    color:var(--primary);
+    box-shadow:0 3px 10px var(--shadow);
+    font-size:22px;
+    font-weight:bold;
+}
+.editvideo .saveBtn{
+    width:100%;
+}
+.editvideo .saveBtn:last-child{
+    background:#dc3545;
+}
+.editvideo .saveBtn:last-child:hover{
+    filter:brightness(1.1);
+}
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+@media(max-width:700px){
+    .editvideo{
+        padding:20px;
+    }
+    .editvideo h2{
+        font-size:24px;
+    }
+    .editvideo input,
+    .editvideo select{
+        height:50px;
+        font-size:17px;
+    }
+    #Each_edit_CP_After{
+        font-size:18px;
+    }
+}
+.Adminepass{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(8px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+.loginCard{
+    width:min(400px,90%);
+    background:var(--card);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    text-align:center;
+}
+.loginCard h2{
+    margin:0 0 10px;
+    color:var(--primary);
+}
+.loginCard p{
+    color:#777;
+    margin-bottom:25px;
+}
+.passwordBox{
+    position:relative;
+}
+.passwordBox input{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px 50px 14px 15px;
+    border:2px solid #ddd;
+    border-radius:12px;
+    background: var(--bg);
+    color: var(--text);
+    outline:none;
+    font-size:16px;
+    transition:.3s;
+}
+.passwordBox input:focus{
+    border-color:var(--primary);
+}
+.eyeBtn{
+    color: var(--text);
+    position:absolute;
+    left:10px;
+    top:50%;
+    transform:translateY(-50%);
+    width:36px;
+    height:36px;
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:18px;
+}
+.loginBtn{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:var(--primary);
+    color:#fff;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+.loginBtn:hover{
+    transform:translateY(-2px);
+    opacity:.9;
+}
+.loginBtn:active{
+    transform:scale(.98);
+}
+.Editepass{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(8px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+.editPassCard{
+    width:min(420px,92%);
+    background:var(--card);
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+.editPassCard h2{
+    margin:0;
+    text-align:center;
+    color:var(--primary);
+}
+.editPassCard p{
+    text-align:center;
+    color:#777;
+    margin:10px 0 25px;
+}
+.inputGroup{
+    margin-bottom:15px;
+}
+.inputGroup input{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px 15px;
+    border:2px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+    transition:.25s;
+    background: var(--bg);
+    color: var(--text);
+}
+.inputGroup input:focus{
+    border-color:var(--primary);
+}
+.editPassBtns{
+    display:flex;
+    gap:12px;
+    margin-top:25px;
+}
+.editPassBtns button{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+.saveBtn{
+    background:var(--primary);
+    color:#fff;
+}
+.saveBtn:hover{
+    transform:translateY(-2px);
+    opacity:.9;
+}
+.cancelBtn{
+    background:#e74c3c;
+    color:#fff;
+}
+.cancelBtn:hover{
+    transform:translateY(-2px);
+    opacity:.9;
+}
+</style>
+<body dir="rtl">
+    <div class="header" id="header">
+        <div class="card">👨‍🎓 الطلاب</div>
+        <div class="card hide">📝 الامتحانات</div>
+        <div class="card">🎥 الفيديوهات</div>
+        <div class="card">⚙️ الاعدادات</div>
+    </div>
+    <div id="loadingScreen">
+        <div class="loader"></div>
+        <h2>جاري تحميل البيانات...</h2>
+    </div>
+    <div class="Students" id="STUPAGE">
+        <div class="Search_Par">
+            <input type="text" class="searchInput" placeholder="🔍 ابحث...">
+            <select class="searchFilter">
+                <option>الكل</option>
+                <option>الاسم</option>
+                <option>الكود</option>
+                <option>النوع</option>
+            </select>
+            <button class="refreshBtn">🔄 تحديث</button>
+            <span class="counter">
+                العدد : <b>0</b>
+            </span>
+        </div>
+        <button class="addBtn" onclick="open_add_student()"> إضافة طالب </button>
+    </div>
+    <div class="Exams">
+        <div class="Search_Par">
+            <input type="text" class="searchInput" placeholder="🔍 ابحث...">
+            <select class="searchFilter">
+                <option>الكل</option>
+                <option>الاسم</option>
+                <option>الكود</option>
+            </select>
+            <button class="refreshBtn">🔄 تحديث</button>
+            <span class="counter">
+                العدد : <b>0</b>
+            </span>
+        </div>
+        <button class="addBtn"> إضافة امتحان </button>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الامتحان</p>
+            <button>التفاصيل</button>
+        </div>
+    </div>
+    <div class="Videos">
+        <div class="Search_Par">
+            <input type="text" class="searchInput" placeholder="🔍 ابحث...">
+            <select class="searchFilter">
+                <option>الكل</option>
+                <option>الاسم</option>
+                <option>الكود</option>
+            </select>
+            <button class="refreshBtn">🔄 تحديث</button>
+            <span class="counter">
+                العدد : <b>0</b>
+            </span>
+        </div>
+        <button class="addBtn" onclick="open_add_vidio()"> إضافة فيديو </button>
+        <div class="bigcard">
+            <p>اسم الفيديو</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الفيديو</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الفيديو</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الفيديو</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الفيديو</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الفيديو</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الفيديو</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الفيديو</p>
+            <button>التفاصيل</button>
+        </div>
+        <div class="bigcard">
+            <p>اسم الفيديو</p>
+            <button>التفاصيل</button>
+        </div>
+    </div>
+    <div id="setting" class="PAGE">
+        <div class="settingsBox">
+            <div class="card" id="themeBtn">🌙 الوضع الليلي</div>
+            <h2>لون الواجهة</h2>
+            <div class="themePicker">
+                <div class="themeColor active" data-color="#10b981" style="background:#10b981"></div>
+                <div class="themeColor" data-color="#8b5cf6" style="background:#8b5cf6"></div>
+                <div class="themeColor" data-color="#f97316" style="background:#f97316"></div>
+                <div class="themeColor" data-color="#ef4444" style="background:#ef4444"></div>
+                <div class="themeColor" data-color="#3b82f6" style="background:#3b82f6"></div>
+                <div class="themeColor" data-color="#06b6d4" style="background:#06b6d4"></div>
+                <div class="themeColor" data-color="#14b8a6" style="background:#14b8a6"></div>
+                <div class="themeColor" data-color="#84cc16" style="background:#84cc16"></div>
+                <div class="themeColor" data-color="#eab308" style="background:#eab308"></div>
+                <div class="themeColor" data-color="#ec4899" style="background:#ec4899"></div>
+                <div class="themeColor" data-color="#6366f1" style="background:#6366f1"></div>
+                <div class="themeColor" data-color="#64748b" style="background:#64748b"></div>
+                <div class="themeColor" data-color="#0f172a" style="background:#0f172a"></div>
+            </div>
+            <div class="card" onclick="open_edit_Passw()" id="PasswBtn"> 🔐 تغير كلمه المرور </div>
+        </div>
+    </div>    <div class="Editepass hide" id="Editepass">
+        <div class="editPassCard">
+            <h2>🔑 تغيير كلمة المرور</h2>
+            <p>أدخل البيانات التالية</p>
+            <div class="passwordBox">
+                <input type="password" id="OldPassword" placeholder="كلمة المرور الحالية">
+                <button class="eyeBtn" onclick="TogglePassword('OldPassword')">
+                    👁
+                </button>
+            </div>
+            <div class="passwordBox">
+                <input type="password" id="NewPassword" placeholder="كلمة المرور الجديدة">
+                <button class="eyeBtn" onclick="TogglePassword('NewPassword')">
+                    👁
+                </button>
+            </div>
+            <div class="passwordBox">
+                <input type="password" id="ConfirmPassword" placeholder="تأكيد كلمة المرور">
+                <button class="eyeBtn" onclick="TogglePassword('ConfirmPassword')">
+                    👁
+                </button>
+            </div>
+            <div class="editPassBtns">
+                <button class="saveBtn" onclick="hashPassword(OldPassword.value).then(SavePassword)">
+                    💾 حفظ
+                </button>
+                <button class="cancelBtn" onclick="cancel_add_passw()">
+                    ❌ إلغاء
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="Adminepass hide" id="Adminepass">
+        <div class="loginCard">
+            <h2>🔐 تسجيل دخول </h2>
+            <p>أدخل كلمة المرور للمتابعة</p>
+            <div class="passwordBox">
+                <input type="password"id="AdminPassword"placeholder="كلمة المرور">
+                <button class="eyeBtn" onclick="TogglePassword('AdminPassword')">
+                    👁
+                </button>
+            </div>
+            <button
+                class="loginBtn"
+                onclick="hashPassword(AdminPassword.value).then(CheckPassword)">
+                دخول
+            </button>
+        </div>
+    </div>
+    <div class="addstudent hide" id="addstudent">
+        <h2>➕ إضافة طالب جديد</h2>
+        <input type="text" id="Student_name" placeholder="اسم الطالب">
+        <input type="tel" id="Student_PHN" placeholder="رقم الطالب">
+        <input type="tel" id="Student_PPHN" placeholder="رقم ولي الامر">
+        <select id="Student_age">
+            <option value="">اختر الصف الدراسي</option>
+            <option value="1">الأول الثانوي</option>
+            <option value="2">الثاني الثانوي</option>
+            <option value="3">الثالث الثانوي</option>
+        </select>
+        <select id="Student_Gender">
+            <option value="">اختر النوع</option>
+            <option value="M"> ولد</option>
+            <option value="F"> بنت</option>
+        </select>
+        <center>
+            <h1 id="Student_Codee_To_Sign_in">Code : Jee1</h1><br>
+            <img src="https://raw.githubusercontent.com/mrosamavidiosystem-tech/MainPAGE/refs/heads/main/WepQRCode.png" width="400"height="400">
+        </center>
+        <button class="saveBtn"id="add_Student_Button">💾 حفظ الطالب</button>
+        <button class="saveBtn" style="background: red;" onclick="cancel_add_student()">❌رجوع</button>
+    </div>
+    <div class="editstudent hide" id="editstudent">
+        <h2>✏️ تعديل طالب موجود </h2>
+        <input type="text" id="Student_edit_name" placeholder="اسم الطالب">
+        <input type="tel" id="Student_edit_PHN" placeholder="رقم الطالب">
+        <input type="tel" id="Student_edit_PPHN" placeholder="رقم ولي الامر">
+        <select id="Student_edit_age">
+            <option value="">اختر الصف الدراسي</option>
+            <option value="1">الأول الثانوي</option>
+            <option value="2">الثاني الثانوي</option>
+            <option value="3">الثالث الثانوي</option>
+        </select>
+        <select id="Student_edit_Gender">
+            <option value="">اختر النوع</option>
+            <option value="M"> ولد</option>
+            <option value="F"> بنت</option>
+        </select>
+        <center>
+            <h1 id="Student_Codee_To_Edit">Code : Jee1</h1><br>
+            <img src="https://raw.githubusercontent.com/mrosamavidiosystem-tech/MainPAGE/refs/heads/main/WepQRCode.png" width="400"height="400">
+        </center>
+        <button class="saveBtn"id="edit_Student_Button">💾 حفظ الطالب</button>
+        <button class="saveBtn" style="background: red;" onclick="cancel_add_student()">❌رجوع</button>
+    </div>
+    <div class="student_detales hide" id="student_detales">    </div>
+    <div class="editvideo hide" id="editvideo">
+        <h2>✏️ تعديل فيديو موجود</h2>
+        <input type="text" id="Video_edit_Name" placeholder="اسم الفيديو">
+        <input type="number" id="Video_edit_CP_len" min="1" placeholder="عدد نقاط التحقق أثناء المشاهدة">
+        <center>
+            <h3 id="Each_edit_CP_After">
+                كل نقطة تحقق بعد --:--:--
+            </h3>
+        </center>
+        <select id="Video_edit_Class">
+            <option value=""> اختر الصف الدراسي الموجه له الفيديو</option>
+            <option value="1"> الأول الثانوي</option>
+            <option value="2"> الثاني الثانوي</option>
+            <option value="3"> الثالث الثانوي</option>
+        </select>
+        <button class="saveBtn" id="edit_Video_Button"> 💾 حفظ الفيديو</button>
+        <button class="saveBtn" style="background:#dc3545;" onclick="cancel_add_video()"> ❌ رجوع </button>
+    </div>
+    <div class="addvideo hide" id="addvideo">
+        <div class="videoForm">
+            <div class="videoInputs">
+                <h2>➕ إضافة فيديو جديد</h2>
+                <input type="text" id="Video_URL"placeholder="لينك فيديو يوتيوب">
+                <center>
+                    <img id="Video_Thumbnail">
+                </center>
+                <input type="text" id="Video_Name" placeholder="اسم الفيديو">
+            <div class="video-duration">
+                <label>مدة الفيديو</label>
+                <div class="duration-inputs">
+                    <input type="number" id="Video_Seconds" min="0" max="59" placeholder="ثانية">
+                    <span>:</span>
+                    <input type="number" id="Video_Minutes" min="0" max="59" placeholder="دقيقة">
+                    <span>:</span>
+                    <input type="number" id="Video_Hours" min="0" max="23" placeholder="ساعة">
+                </div>
+            </div>
+            <input type="number" id="Video_CP_len" min="1" placeholder="عدد نقاط التحقق أثناء المشاهدة">
+            <center>
+                <h3 id="Each_CP_After">
+                    كل نقطة تحقق بعد --:--:--
+                </h3>
+            </center>
+            <select id="Video_Class">
+                <option value=""> اختر الصف الدراسي الموجه له الفيديو</option>
+                <option value="1"> الأول الثانوي</option>
+                <option value="2"> الثاني الثانوي</option>
+                <option value="3"> الثالث الثانوي</option>
+            </select>
+                <button class="saveBtn" id="add_Video_Button"> 💾 حفظ الفيديو</button>
+                <button class="saveBtn" style="background:#dc3545;" onclick="cancel_add_video()"> ❌ رجوع </button>
+            </div>
+            <div class="videoPreview">
+                <div class="videoPreview">
+                    <div id="YoutubeVideos"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="video_detales hide" id="video_detales">    </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+    const API_KEY = "AIzaSyBPUZwk-YICNLrF2CpVSFrNPb89dppj0HA";
+const CHANNEL_ID = "UC07j1clV9bHSuGht4XsAHgA";
+async function SelectVideo(videoId){
+    const url =`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoId}&key=${API_KEY}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const video = data.items[0];
+    document.getElementById("Video_URL").value =`https://www.youtube.com/watch?v=${videoId}`;
+    document.getElementById("Video_Name").value =video.snippet.title;
+    const img = document.getElementById("Video_Thumbnail");
+    img.src = video.snippet.thumbnails.high.url;
+    img.style.display = "block";
+    FillDuration(video.contentDetails.duration);
+}
+function FillDuration(iso){
+    const h = +(iso.match(/(\d+)H/) || [0,0])[1];
+    const m = +(iso.match(/(\d+)M/) || [0,0])[1];
+    const s = +(iso.match(/(\d+)S/) || [0,0])[1];
+    document.getElementById("Video_Hours").value = h;
+    document.getElementById("Video_Minutes").value = m;
+    document.getElementById("Video_Seconds").value = s;
+    updateCheckpointText();
+}
+async function LoadYoutubeVideos() {
+    const url =`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&type=video&order=date&maxResults=20`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const container = document.getElementById("YoutubeVideos");
+    container.innerHTML = "";
+    data.items.forEach(video => {
+        container.innerHTML += `
+        <div class="YoutubeCard">
+            <img src="${video.snippet.thumbnails.high.url}">
+            <h3>${video.snippet.title}</h3>
+            <button onclick="SelectVideo('${video.id.videoId}')">
+                اختيار
+            </button>
+        </div>
+        `;
+    });
+}
+const configs = {
+    Jee1: {
+        apiKey: "AIzaSyAraxHRdTA-JJhgMnabAOJX-QyhRtnBNo8",
+        authDomain: "jee1-36fc4.firebaseapp.com",
+        databaseURL: "https://jee1-36fc4-default-rtdb.firebaseio.com",
+        projectId: "jee1-36fc4",
+        storageBucket: "jee1-36fc4.firebasestorage.app",
+        messagingSenderId: "947898902604",
+        appId: "1:947898902604:web:f297faf2d6c8cc34c6ece9",
+        measurementId: "G-MVF4RXZLBM"
+    },
+    Jee2: {
+        apiKey: "AIzaSyCuk7yShSMY4dlqN74xbBQwjq9TY2XQFPA",
+        authDomain: "jee2-f2703.firebaseapp.com",
+        projectId: "jee2-f2703",
+        storageBucket: "jee2-f2703.firebasestorage.app",
+        messagingSenderId: "205380177562",
+        appId: "1:205380177562:web:b36c72449a2501d0cb9923",
+        measurementId: "G-3VFG0RT2ZG"
+    },
+    Jee3: {
+        apiKey: "AIzaSyD0hey_htn46HNPnW2rlrfyqqx8GmodpWw",
+        authDomain: "jee3-6b382.firebaseapp.com",
+        databaseURL: "https://jee3-6b382-default-rtdb.firebaseio.com",
+        projectId: "jee3-6b382",
+        storageBucket: "jee3-6b382.firebasestorage.app",
+        messagingSenderId: "783255783421",
+        appId: "1:783255783421:web:6c9c15d156f812d2f47b94",
+        measurementId: "G-XVB4NL4D53"
+    },
+    Jee4: {
+        apiKey: "AIzaSyDyl6pbGaKY_p_rKgrxeH9UoljFxlhdLNM",
+        authDomain: "jee4-37f8e.firebaseapp.com",
+        projectId: "jee4-37f8e",
+        storageBucket: "jee4-37f8e.firebasestorage.app",
+        messagingSenderId: "240927949394",
+        appId: "1:240927949394:web:5461f2c94de4d23857558b",
+        measurementId: "G-2LEKE46PJP"
+    },
+    Jee5: {
+        apiKey: "AIzaSyD7aV6jOUAPt9pSZYUq4BIHyN4mprqzqUA",
+        authDomain: "jee5-e2a05.firebaseapp.com",
+        projectId: "jee5-e2a05",
+        storageBucket: "jee5-e2a05.firebasestorage.app",
+        messagingSenderId: "762511933638",
+        appId: "1:762511933638:web:a37d6bba29a1a9f060d7c7",
+        measurementId: "G-8CR1CSP3JN"
+    },
+    Jee6: {
+        apiKey: "AIzaSyC4lPG4qYWmjIbAqENoFx17XTfJIlbG4Lk",
+        authDomain: "jee6-a301b.firebaseapp.com",
+        projectId: "jee6-a301b",
+        storageBucket: "jee6-a301b.firebasestorage.app",
+        messagingSenderId: "50366053472",
+        appId: "1:50366053472:web:1f2095d2a10ca90f249705",
+        measurementId: "G-KSZTF3Q3QZ"
+    },
+    Jee7: {
+        apiKey: "AIzaSyCnLo7QGcwcfyEX_hgiEKCd4d5uNsgO0Eg",
+        authDomain: "jee7-b99ac.firebaseapp.com",
+        projectId: "jee7-b99ac",
+        storageBucket: "jee7-b99ac.firebasestorage.app",
+        messagingSenderId: "566114662539",
+        appId: "1:566114662539:web:01bc38d172a04e6e2ffc8e",
+        measurementId: "G-0N5B9B2D2L"
+    },
+    Jee8: {
+        apiKey: "AIzaSyB1kXaLyVj9U-SCGvG1sFp8CS891GdJapU",
+        authDomain: "jee8-2bcc4.firebaseapp.com",
+        projectId: "jee8-2bcc4",
+        storageBucket: "jee8-2bcc4.firebasestorage.app",
+        messagingSenderId: "887180003937",
+        appId: "1:887180003937:web:5d599a3d39dd5174173820",
+        measurementId: "G-Y24224GQ6F"
+    },
+};
+const BOT_TOKEN = "8636255583:AAG5nLMIHDNfqqaLNAVLbek9x6J9A5OqbZ0";
+async function SendTelegramNotification(chatId, message) {
+    const url =`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+            parse_mode: "HTML"
+        })
+    });
+}
+async function sendNotification(Grade,Title){
+    let chatId = "";
+    if (Grade == "1")
+        chatId = "-1004453426018";
+    if (Grade == "2")
+        chatId = "-1003726483361";
+    if (Grade == "3")
+        chatId = "-1003829025110";
+    await SendTelegramNotification(
+        chatId,
+    `🎬 فيديو جديد
+    📚 ${Title}
+    اضغط داخل المنصة للمشاهدة.`
+    );
+}
+const firebaseConfig_JeeMain = {
+    apiKey: "AIzaSyDOvsOinvOuvuXpRXYTodQPW9PuurWaKX4",
+    authDomain: "jeemain-bfaca.firebaseapp.com",
+    projectId: "jeemain-bfaca",
+    storageBucket: "jeemain-bfaca.firebasestorage.app",
+    messagingSenderId: "856241762379",
+    appId: "1:856241762379:web:40f6c0d57fa81c64f81dce",
+    measurementId: "G-FZ0G3CZL14"
+};
+const DB = {};
+for (const name in configs) {
+    const app = firebase.initializeApp(configs[name], name);
+    DB[name] = app.database();
+}
+const appJeeMain = firebase.initializeApp(firebaseConfig_JeeMain, "JeeMain");
+const JeeMain = appJeeMain.database();
+function write(dbName, data) {
+    DB[dbName].ref("/").set(data).catch(console.error);
+}
+function read(dbName,callback) {
+    DB[dbName]
+        .ref("/")
+        .once("value")
+        .then(snapshot => {
+            data=snapshot.val()
+            if (data==null){
+                data={
+                    Students:{},
+                    StudentsInJee_Pointer:0,
+                    free_IDS:[-1],
+                }
+            }
+            callback(data);
+        })
+        .catch(console.error);
+}
+function realTimeRead(dbName, path, callback) {
+    DB[dbName]
+        .ref(path)
+        .on("value", snapshot => {
+            callback(snapshot.val());
+        });
+}
+function stopRealTimeRead(dbName, path) {
+    DB[dbName]
+        .ref(path)
+        .off();
+}
+function SODOread(callback){
+    JeeMain.ref("/")
+        .once("value")
+        .then(snapshot => {
+            callback(snapshot.val());
+        })
+        .catch(console.error);
+}
+function SODOwrite(data){
+    JeeMain.ref("/").set(data).catch(console.error);
+}
+function SODOrealTimeRead(path, callback) {
+    JeeMain.ref(path)
+        .on("value", snapshot => {
+            callback(snapshot.val());
+        });
+}
+var now_pointer 
+SODOread(function(data){
+    now_pointer=data.Sign_in_Pointer
+})
+let GIL1=false
+let GIL2=false
+const serverCount = Object.keys(configs).length;
+Backend={
+    Comunication1:function(name,age,PHN,PPHN,gender){ // add student
+        Server="Jee"+String(now_pointer)
+        read(Server,function(data){
+            if (data.free_IDS.length>1){
+                Stupoin=data.free_IDS[data.free_IDS.length-1]
+                data.free_IDS.pop()
+            }else{
+                data.StudentsInJee_Pointer=data.StudentsInJee_Pointer+1
+                Stupoin=data.StudentsInJee_Pointer
+            }
+            data.Students[Stupoin]={
+                name:name,
+                age:age,
+                code:Server,
+                id:Stupoin,
+                parent:String(PPHN),
+                Gender:gender,
+                phone:PHN
+            }
+            write(Server,data)
+        })
+        now_pointer++
+        if (now_pointer > serverCount){
+            now_pointer=1
+        }
+        SODOread(function(data){
+            data.Sign_in_Pointer=now_pointer
+            SODOwrite(data)
+        })
+    },
+    Comunication2:function(){ //read all students
+        if (GIL1) return;
+        GIL1 = true;
+        StudentsCache = [];
+        let LoadedServers = 0;
+        const ServerCount = Object.keys(configs).length;
+        DrawStudents([]);
+        for (const Jee in configs) {
+            read(Jee, function (data) {
+                if (data && data.Students) {
+                    for (const ID in data.Students) {
+                        if (data.Students[ID]==-1){return}
+                        StudentsCache.push(data.Students[ID]);
+                    }
+                }
+                LoadedServers++;
+                if (LoadedServers === ServerCount) {
+                    StudentsCache.sort((a, b) =>
+                        a.name.localeCompare(b.name, "ar")
+                    );
+                    DrawStudents(StudentsCache);
+                    GIL1 = false;
+                }
+            });
+        }
+    },
+    Comunication3:function(Server,name,age,PHN,PPHN,gender,STUID){ // edit student
+        read(Server,function(data){
+            data.Students[STUID]={
+                name:name,
+                age:age,
+                code:Server,
+                id:STUID,
+                parent:String(PPHN),
+                Gender:gender,
+                phone:PHN
+            }
+            write(Server,data)
+        })
+    },
+    Comunication4:function(Server,Student_ID){ // delete student
+        read(Server,function(data){
+            delete data.Students[Student_ID]
+            data.Students[Student_ID]=-1
+            data.free_IDS.push(Student_ID)
+            write(Server,data)
+        })
+        openPage(0)
+    },
+    Comunication5:function(URL,name,Thumbnail,CPL,age,time,interval){ // add video
+        SODOread(function(data){
+            if (data.videos==undefined){
+                data.videos={}
+            }
+            if (data.Videos_AVIDS.length>1){
+                VID=data.Videos_AVIDS[data.Videos_AVIDS.length-1]
+                data.Videos_AVIDS.pop()
+            }
+            else{
+                data.Video_Pointer=data.Video_Pointer+1
+                VID=data.Video_Pointer
+            }
+            data.videos[VID]={
+                URL:URL,
+                VID:VID,
+                name:name,
+                Thumbnail:Thumbnail,
+                interval:interval,
+                CPL:CPL,
+                age:age,
+                time:time,
+            }
+            SODOwrite(data)
+        })
+    },
+    Comunication6:function(){ // read all videos
+        if (GIL2) return;
+        GIL2 = true;
+        VideosCache = [];
+        DrawVideos([]);
+        SODOread(function (data) {
+            if (data && data.videos) {
+                data.videos.forEach(video => {
+                    if (video==-1){return}
+                    VideosCache.push(video);
+                });
+            }
+            VideosCache.sort((a, b) =>
+                (a.Name || a.name || "").localeCompare(
+                    (b.Name || b.name || ""),
+                    "ar"
+                )
+            );
+            DrawVideos(VideosCache);
+            GIL2 = false;
+        });
+    },
+    Comunication7:function(VID){ // delete video
+        SODOread(function(data){
+            delete data.videos[VID]
+            data.videos[VID]=-1
+            data.Videos_AVIDS.push(VID)
+            SODOwrite(data)
+        })
+    },
+    Comunication8:function(VID,name,age,CPLE,interval){ // edit video
+        SODOread(function(data){
+            EV=data.videos[VID]
+            data.videos[VID]={
+                URL:EV.URL,
+                VID:VID,
+                name:name,
+                Thumbnail:EV.Thumbnail,
+                interval:interval,
+                CPL:CPLE,
+                age:age,
+                time:EV.time,
+            }
+            SODOwrite(data)
+        })
+    },
+    Comunication9:function(video){ // puplish video
+        hashname=Jee_Encription(video.name)
+        let viddata={}
+        for (i=0;i<Number(video.CPL);i++){
+            viddata["CP"+String(i+1)]=false
+        }
+        for (const jee in configs){
+            read(jee,function(data){
+                for (STU in data.Students)
+                    if (data.Students[STU].age==video.age){
+                        if (data.Students[STU].videos==undefined){
+                            data.Students[STU].videos={}
+                        }
+                        data.Students[STU].videos[hashname]=viddata
+                    }
+                write(jee,data)
+                console.log(jee)
+                console.log(data)
+            })
+        }
+        sendNotification(video.age,video.name)
+    },
+    Comunication10:function (Passw){ // edit Admen Password
+        SODOread(function(data){
+            data.Password=Passw
+            SODOwrite(data)
+            SendTelegramNotification("5735394288","new Admen PassWord : "+String(NewPassword.value))
+            cancel_add_passw()
+        })
+    },
+}
+for (const Jee in configs){
+    realTimeRead(Jee,"Students",Backend.Comunication2)
+}
+SODOrealTimeRead("videos",Backend.Comunication6)
+const btn = document.getElementById("themeBtn");
+let VideosCache = [];
+let StudentsCache = [];
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark");
+    btn.textContent = "☀️الوضع النهاري";
+}
+btn.onclick = () => {
+    document.body.classList.toggle("dark");
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+        btn.textContent = "☀️الوضع النهاري";
+    }else{
+        localStorage.setItem("theme","light");
+        btn.textContent = "🌙الوضع الليلي";
+    }
+};
+function Jee_Encription(text){
+    res="A"
+    for (const car of text){
+        res+=String(car.codePointAt(0))+"_"
+    }
+    console.log()
+    return res.slice(0,res.length-1)
+}
+function Jee_Decode(Code){
+    res=""
+    Code=Code.slice(1,Code.length)
+    Code.split("_").forEach(Co => {
+        res+=String.fromCodePoint(Number(Co))
+    });
+    return res
+}
+const headerCards = document.querySelectorAll(".header .card");
+const hides_Paages = document.querySelectorAll(".hide");
+const Students = document.querySelector(".Students");
+const Exams = document.querySelector(".Exams");
+const Videos = document.querySelector(".Videos");
+const Settings = document.querySelector(".PAGE");
+const pages = [Students, Exams, Videos, Settings];
+function hidePages() {
+    pages.forEach(page => page.style.display = "none");
+}
+function removeActive() {
+    headerCards.forEach(card => card.classList.remove("active"));
+}
+function openPage(index) {
+    hides_Paages.forEach(ele => {
+        ele.style.display = "none";
+    });
+    try{
+        header.style.display="flex"
+        hidePages();
+        removeActive();
+        pages[index].style.display = "grid";
+        if(index === 3){
+            pages[index].style.display = "flex";
+        }
+        headerCards[index].classList.add("active");
+    }
+    catch{
+        header.style.display="none"
+    }
+}
+openPage(0);
+for (let i=0;i<headerCards.length ;i++){
+    headerCards[i].onclick = () => openPage(i);
+}
+const colors = document.querySelectorAll(".themeColor");
+const savedColor = localStorage.getItem("themeColor");
+if(savedColor){
+    document.documentElement.style.setProperty("--primary", savedColor);
+    document.documentElement.style.setProperty("--theme-color", savedColor);
+    document.documentElement.style.setProperty("--primary-shadow",savedColor + "66");
+    colors.forEach(c=>{
+        c.classList.toggle("active", c.dataset.color === savedColor);
+    });
+}
+colors.forEach(color=>{
+    color.onclick = ()=>{
+        colors.forEach(c=>c.classList.remove("active"));
+        color.classList.add("active");
+        document.documentElement.style.setProperty("--primary", color.dataset.color);
+        document.documentElement.style.setProperty("--theme-color", color.dataset.color);
+        document.documentElement.style.setProperty("--primary-shadow",color.dataset.color + "66");
+        localStorage.setItem("themeColor", color.dataset.color);
+    };
+});
+add_Student_Button.onclick = function () {
+    const name = Student_name.value.trim();
+    const age = Student_age.value;
+    const PHN = Student_PHN.value.trim();
+    const PPHN = Student_PPHN.value.trim();
+    const gender = Student_Gender.value;
+    if (name.split(/\s+/).length < 4) {
+        alert("❌ يجب إدخال الاسم رباعي على الأقل.");
+        Student_name.focus();
+        return;
+    }
+    if (!/^01\d{9}$/.test(PHN)) {
+        alert("❌ رقم الطالب غير صحيح.");
+        Student_PHN.focus();
+        return;
+    }
+    if (!/^01\d{9}$/.test(PPHN)) {
+        alert("❌ رقم ولي الأمر غير صحيح.");
+        Student_PPHN.focus();
+        return;
+    }
+    if (age === "") {
+        alert("❌ اختر الصف الدراسي.");
+        Student_age.focus();
+        return;
+    }
+    if (gender === "") {
+        alert("❌ اختر النوع.");
+        Student_Gender.focus();
+        return;
+    }
+    Backend.Comunication1(name, age, PHN, PPHN, gender);
+    cancel_add_student()
+};
+function cancel_add_video(){
+    Video_URL.value=""
+    Video_Thumbnail.src=""
+    Video_Name.value=""
+    Video_Hours.value=""
+    Video_Minutes.value=""
+    Video_Seconds.value=""
+    openPage(2)
+    Video_in_idet_id=-1
+    Video_in_edit_time=-1
+}
+function cancel_add_student(){
+    Student_name.value=""
+    Student_age.value=""
+    Student_PHN.value=""
+    Student_PPHN.value=""
+    Student_Gender.value=""
+    Student_edit_name.value=""
+    Student_edit_age.value=""
+    Student_edit_PHN.value=""
+    Student_edit_PPHN.value=""
+    Student_edit_Gender.value=""
+    openPage(0);
+    Student_in_idet_id=-1
+}
+function cancel_add_passw(){
+    OldPassword.value=""
+    NewPassword.value=""
+    ConfirmPassword.value=""
+    openPage(3);
+}function open_add_video(){
+    openPage(-1)
+    addvideo.style.display=("flex")
+    LoadYoutubeVideos();
+}
+function open_add_student(){
+    openPage(-1)
+    Student_Codee_To_Sign_in.innerHTML="Code : Jee"+String(now_pointer)
+    addstudent.style.display=("flex")
+}
+let Video_in_idet_id=-1
+let Student_in_idet_id=-1
+let Video_in_edit_time=-1
+add_Video_Button.onclick = function (){
+    URL=Video_URL.value
+    name=Video_Name.value
+    Thumbnail=Video_Thumbnail.src
+    CPL=Number(Video_CP_len.valueAsNumber)
+    age=Video_Class.value
+    Video_Time_in_Seconds=(Number(Video_Hours.valueAsNumber)*3600)+(Number(Video_Minutes.valueAsNumber)*60)+Number(Video_Seconds.valueAsNumber)
+    count=CPL+1
+    interval = Math.floor(Number(Video_Time_in_Seconds) / Number(count));
+    Backend.Comunication5(URL,name,Thumbnail,CPL,age,Video_Time_in_Seconds,interval)
+    cancel_add_video()
+}
+edit_Student_Button.onclick = function () {
+    const name = Student_edit_name.value.trim();
+    const age = Student_edit_age.value;
+    const PHN = Student_edit_PHN.value.trim();
+    const PPHN = Student_edit_PPHN.value.trim();
+    const gender = Student_edit_Gender.value;
+    if (name.split(/\s+/).length < 4) {
+        alert("❌ يجب إدخال الاسم رباعي على الأقل.");
+        Student_name.focus();
+        return;
+    }
+    if (!/^01\d{9}$/.test(PHN)) {
+        alert("❌ رقم الطالب غير صحيح.");
+        Student_PHN.focus();
+        return;
+    }
+    if (!/^01\d{9}$/.test(PPHN)) {
+        alert("❌ رقم ولي الأمر غير صحيح.");
+        Student_PPHN.focus();
+        return;
+    }
+    if (age === "") {
+        alert("❌ اختر الصف الدراسي.");
+        Student_age.focus();
+        return;
+    }
+    if (gender === "") {
+        alert("❌ اختر النوع.");
+        Student_Gender.focus();
+        return;
+    }
+    Backend.Comunication3(Student_Codee_To_Edit.innerHTML,name, age, PHN, PPHN, gender,Student_in_idet_id);
+    cancel_add_student()
+};
+edit_Video_Button.onclick=function(){
+    name=Video_edit_Name.value
+    age=Video_edit_Class.value
+    CPLE=Video_edit_CP_len.valueAsNumber
+    interval = Math.floor(Number(Video_in_edit_time) / Number(CPLE));
+    Backend.Comunication8(Video_in_idet_id,name,age,CPLE,interval)
+    cancel_add_video()
+}
+function open_edit_student(stodent){
+    openPage(-1)
+    Student_Codee_To_Edit.innerHTML=stodent.code
+    Student_edit_name.value=stodent.name
+    Student_edit_age.value=stodent.age
+    Student_edit_PHN.value=stodent.phone
+    Student_edit_PPHN.value=stodent.parent
+    Student_edit_Gender.value=stodent.Gender
+    Student_in_idet_id=stodent.id
+    Student_Codee_To_Edit.innerHTML=stodent.code
+    editstudent.style.display=("flex")
+}
+function open_student_detales(student){
+    const grade = {
+        "1":"الأول الثانوي",
+        "2":"الثاني الثانوي",
+        "3":"الثالث الثانوي"
+    }[student.age];
+    const gender = student.Gender=="M" ? "👦 ولد" : "👧 بنت";
+    let examsHTML = "";
+    if(student.exams){
+        for(const exam in student.exams){
+            const total = student.exams[exam][0];
+            const score = student.exams[exam][1];
+            const percent = Math.round(score/total*100);
+            examsHTML += `
+                <div class="examCard">
+                    <div class="examHeader">
+                        <span>${exam}</span>
+                        <span>${score} / ${total}</span>
+                    </div>
+                    <div class="progressBar">
+                        <div class="progressFill"
+                            style="width:${percent}%;">
+                        </div>
+                    </div>
+                    <div class="examPercent">
+                        ${percent}%
+                    </div>
+                </div>
+            `;
+        }
+    }
+    let videosHTML = "";
+    if(student.videos){
+        for(const video in student.videos){
+            const cps = Object.values(student.videos[video]);
+            let watched = 0;
+            let circles = "";
+            for(let i=0;i<cps.length;i++){
+                if(cps[i]) watched++;
+                circles += `
+                    <div class="cpItem">
+                        <div class="cpCircle ${cps[i] ? "done" : ""}"></div>
+                        ${
+                            i<cps.length-1
+                            ?
+                            `<div class="cpLine ${
+                                cps[i] && cps[i+1]
+                                ?
+                                "done"
+                                :
+                                ""
+                            }"></div>`
+                            :
+                            ""
+                        }
+                    </div>
+                `;
+            }
+            videosHTML += `
+                <div class="videoCard">
+                    <div class="videoHeader">
+                        <span>🎥 ${Jee_Decode(video)}</span>
+                        <span>${watched}/${cps.length}</span>
+                    </div>
+                    <div class="cpContainer">
+                        ${circles}
+                    </div>
+                </div>
+            `;
+        }
+    }
+    student_detales.innerHTML = `
+        <div class="studentProfile">
+            <h2>${student.name}</h2>
+            <div class="studentInfo">
+                <div>
+                    <b>📱 رقم الطالب :</b><br>
+                    ${student.phone}
+                </div>
+                <div>
+                    <b>👨‍👩‍👦 ولي الأمر :</b><br>
+                    ${student.parent}
+                </div>
+                <div>
+                    <b>🎓 الصف :</b><br>
+                    ${grade}
+                </div>
+                <div>
+                    <b>🚻 النوع :</b><br>
+                    ${gender}
+                </div>
+                <div>
+                    <b>💻 كود الدخول :</b><br>
+                    ${student.code}
+                </div>
+            </div>
+            <hr>
+            <h3>📊 الامتحانات</h3>
+            ${examsHTML || "<p>لا توجد امتحانات.</p>"}
+            <hr>
+            <h3>🎥 الفيديوهات</h3>
+            ${videosHTML || "<p>لا توجد فيديوهات.</p>"}
+            <hr>
+            <div class="studentButtons">
+                <button
+                    class="waBtn"
+                    onclick="window.open('https://wa.me/2${student.phone}')">
+                    <img src="https://raw.githubusercontent.com/mrosamavidiosystem-tech/AdminePAGE/refs/heads/main/image.png"> واتساب
+                </button>
+                <button
+                    class="msgBtn hide"
+                    onclick="open_student_chat('${student.phone}')">
+                    💻 محادثة
+                </button>
+                <button
+                    class="editBtn"
+                    onclick='open_edit_student(${JSON.stringify(student)})'>
+                    ✏ تعديل
+                </button>
+                <button
+                    class="deleteBtn"
+                    onclick="Backend.Comunication4('${student.code}','${student.id}')">
+                    🗑 حذف
+                </button>
+                <button
+                    class="backBtn"
+                    onclick="openPage(0)">
+                    ↩ رجوع
+                </button>
+            </div>
+        </div>
+    `;
+    openPage(-1);
+    student_detales.style.display="block";
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+function getYoutubeID(url){
+    const reg =/^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(reg);
+    return match ? match[1] : "";
+}
+function delete_video(VID){
+    Backend.Comunication7(VID)
+    openPage(2)
+}
+function open_edit_video(video){
+    Video_in_idet_id=video.VID
+    Video_in_edit_time=video.time
+    Video_edit_Name.value=video.name
+    Video_edit_Class.value=video.age
+    Video_edit_CP_len.valueAsNumber = video.CPL
+    updateEditCheckpointText()
+    openPage(-1)
+    editvideo.style.display="flex"
+}
+function open_edit_Passw(){
+    openPage(-1)
+    Editepass.style.display="flex"
+}function open_video_detales(video) {
+    openPage(-1);
+    const page = document.getElementById("video_detales");
+    page.style.display="flex"
+    let videoId = "";
+    try {
+        videoId = getYoutubeID(video.URL);
+    } catch {
+        videoId = "";
+    }
+    function formatTime(sec) {
+        sec = Number(sec);
+        const h = Math.floor(sec / 3600);
+        const m = Math.floor((sec % 3600) / 60);
+        const s = sec % 60;
+        let txt = "";
+        if (h > 0) txt += `${h} ساعة `;
+        if (m > 0 || h > 0) txt += `${m} دقيقة `;
+        txt += `${s} ثانية`;
+        return txt;
+    }
+    let studentsHTML = "";
+    StudentsCache.forEach(student => {
+        if (student.age !== video.age) return;
+        const VideoKey = Jee_Encription(video.name);
+        if (!student.videos) return;
+        if (!student.videos[VideoKey]) return;
+        const cps = student.videos[VideoKey];
+        let watched = 0;
+        let circles = "";
+        const Keys = Object.keys(cps).sort((a, b) => {
+            return parseInt(a.replace("CP", "")) - parseInt(b.replace("CP", ""));
+        });
+        const Values = Keys.map(key => cps[key]);
+        Values.forEach((done, index) => {
+            if (done) watched++;
+            circles += `
+                <div class="cpItem">
+                    <div class="cpCircle ${done ? "done" : ""}"></div>
+                    ${
+                        index < Values.length - 1
+                        ?
+                        `<div class="cpLine ${
+                            done && Values[index + 1]
+                            ? "done"
+                            : ""
+                        }"></div>`
+                        :
+                        ""
+                    }
+                </div>
+            `;
+        });
+        if (watched < Values.length) {
+            studentsHTML += `
+            <div class="videoCard">
+                <div class="videoHeader">
+                    <span>👨‍🎓 ${student.name}</span>
+                    <span>${watched}/${Values.length}</span>
+                </div>
+                <div class="cpContainer">
+                    ${circles}
+                </div>
+            </div>
+            `;
+        }
+        console.log(watched , Values.length)
+        console.log(StudentsCache)
+    });
+    page.innerHTML = `
+        <div class="videoProfile">
+            <h2>🎬 ${video.name}</h2>
+            <div class="videoBanner">
+                <iframe
+                    src="https://www.youtube.com/embed/${videoId}"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="videoInfo">
+                <div>
+                    <b>🆔 رقم الفيديو</b>
+                    <p>${video.VID}</p>
+                </div>
+                <div>
+                    <b>⏱ مدة الفيديو</b>
+                    <p>${formatTime(video.time)}</p>
+                </div>
+                <div>
+                    <b>📌 عدد نقاط التفتيش</b>
+                    <p>${video.CPL}</p>
+                </div>
+                <div>
+                    <b>⏳ الزمن بين كل نقطة</b>
+                    <p>${formatTime(video.interval)}</p>
+                </div>
+                <div>
+                    <b>🎓 الصف</b>
+                    <p>${video.age}</p>
+                </div>
+                <div>
+                    <b>🔗 الرابط</b>
+                    <a href="${video.URL}" target="_blank">
+                        فتح الفيديو
+                    </a>
+                </div>
+            </div>
+            <div class="cpPreview">
+                <h3>الطلاب الذين لم يكملوا الفيديو</h3>
+                ${studentsHTML || "<p>🎉 جميع الطلاب أكملوا مشاهدة الفيديو.</p>"}
+            </div>
+            <div class="studentButtons">
+                <button class="msgBtn"
+                    onclick='Backend.Comunication9(${JSON.stringify(video)})'>
+                    📢 نشر الفيديو
+                </button>
+                <button class="editBtn"
+                    onclick='open_edit_video(${JSON.stringify(video)})'>
+                    ✏ تعديل
+                </button>
+                <button class="deleteBtn"
+                    onclick="delete_video(${video.VID})">
+                    🗑 حذف
+                </button>
+                <button class="backBtn"
+                    onclick="openPage(2)">
+                    ⬅ رجوع
+                </button>
+            </div>
+        </div>
+    `;
+}
+function TogglePassword(id){
+    const input = document.getElementById(id);
+    input.type =
+        input.type === "password"
+        ? "text"
+        : "password";
+}
+async function hashPassword(password) {
+    const data = new TextEncoder().encode(password);
+    const hash = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(hash))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
+}
+function CheckPassword(passw){
+    SODOread(function(data){
+        if (passw==data.Password){
+            Adminepass.style.display="none"
+            openPage(0)
+        }
+        else{
+            alert("كلمه المرور غير صحيحه")
+        }
+    })
+}
+function SavePassword(passw){
+    SODOread(function(data){
+        NewPassword
+        ConfirmPassword
+        if (passw==data.Password){
+            if ( NewPassword.value == ConfirmPassword.value ){
+                Adminepass.style.display="none"
+                Editepass.style.display="none"
+                hashPassword(NewPassword.value).then(Backend.Comunication10)
+            }
+            else {
+                alert("كلمه المرور الجديده يجب ان تتطابق")
+            }
+        }
+        else{
+            alert("كلمه المرور غير صحيحه")
+        }
+    })
+}
+function Start_App(){
+    Backend.Comunication2()
+    Backend.Comunication6()
+    loadingScreen.style.display="none"
+    Adminepass.style.display="flex"
+}
+openPage(-1)
+setTimeout(Start_App,5000)
+document.getElementById("Video_URL").addEventListener("input", function () {
+    const url = this.value;
+    const match = url.match(/(?:youtube\.com\/.*v=|youtu\.be\/)([^&?/]+)/);
+    if (!match) return;
+    const id = match[1];
+    const img = document.getElementById("Video_Thumbnail");
+    img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    img.style.display = "block";
+});
+function updateEditCheckpointText(){
+    const count = +document.getElementById("Video_edit_CP_len").value+1 || 0;
+    const text = document.getElementById("Each_edit_CP_After");
+    if (count <= 0) {
+        text.textContent = "كل نقطة تحقق بعد --:--";
+        return;
+    }
+    const interval = Math.floor(Video_in_edit_time / count);
+    const hh = Math.floor(interval / 3600);
+    const mm = Math.floor((interval % 3600) / 60);
+    const ss = interval % 60;
+    text.textContent =
+        `كل نقطة تحقق بعد ${String(hh).padStart(2,"0")}:${String(mm).padStart(2,"0")}:${String(ss).padStart(2,"0")}`;
+}
+function updateCheckpointText() {
+    const h = +document.getElementById("Video_Hours").value || 0;
+    const m = +document.getElementById("Video_Minutes").value || 0;
+    const s = +document.getElementById("Video_Seconds").value || 0;
+    const count = +document.getElementById("Video_CP_len").value+1 || 0;
+    const totalSeconds = h * 3600 + m * 60 + s;
+    const text = document.getElementById("Each_CP_After");
+    if (count <= 0 || totalSeconds <= 0) {
+        text.textContent = "كل نقطة تحقق بعد --:--";
+        return;
+    }
+    const interval = Math.floor(totalSeconds / count);
+    const hh = Math.floor(interval / 3600);
+    const mm = Math.floor((interval % 3600) / 60);
+    const ss = interval % 60;
+    text.textContent =
+        `كل نقطة تحقق بعد ${String(hh).padStart(2,"0")}:${String(mm).padStart(2,"0")}:${String(ss).padStart(2,"0")}`;
+}
+document.getElementById("Video_Hours").addEventListener("input", updateCheckpointText);
+document.getElementById("Video_Minutes").addEventListener("input", updateCheckpointText);
+document.getElementById("Video_Seconds").addEventListener("input", updateCheckpointText);
+document.getElementById("Video_CP_len").addEventListener("input", updateCheckpointText);
+document.getElementById("Each_edit_CP_After").addEventListener("input", updateEditCheckpointText);
+function DrawStudents(List){
+    STUPAGE.innerHTML = `
+    <div class="Search_Par">
+        <input type="text"
+               id="StudentSearch"
+               class="searchInput"
+               placeholder="🔍 ابحث...">
+        <select id="StudentSearchType"
+                class="searchFilter">
+            <option value="all">الكل</option>
+            <option value="name">الاسم</option>
+            <option value="code">المرحله</option>
+            <option value="gender">النوع</option>
+        </select>
+        <button class="refreshBtn"
+        onclick="SearchStudents()">
+            🔍 بحث
+        </button>
+        <span class="counter">
+            العدد : <b>${List.length}</b>
+        </span>
+    </div>
+    <button class="addBtn"
+    onclick="open_add_student()">
+        إضافة طالب
+    </button>
+    `;
+    List.forEach(student=>{
+        let color="#8ECA3C";
+        if(student.Gender=="F")
+            color="#FFB6A6";
+        STUPAGE.innerHTML += `
+        <div class="bigcard">
+            <p>${student.name}</p>
+            <button
+            style="background:${color}"
+            onclick='open_student_detales(${JSON.stringify(student)})'>
+                التفاصيل
+            </button>
+        </div>`;
+    });
+}
+function SearchStudents(){
+    const text =document.getElementById("StudentSearch").value.toLowerCase();
+    const type =document.getElementById("StudentSearchType").value;
+    const Result = StudentsCache.filter(student=>{
+        const name =
+        (student.name || "").toLowerCase();
+        const code =student.age
+        const gender =student.Gender=="M"? "ولد": "بنت";
+        if(type=="name")
+            return name.includes(text);
+        if(type=="code")
+            return code.includes(text);
+        if(type=="gender")
+            return gender.includes(text);
+        return (
+            name.includes(text) ||
+            code.includes(text) ||
+            gender.includes(text)
+        );
+    });
+    DrawStudents(Result);
+    document.getElementById("StudentSearch").value=text
+    document.getElementById("StudentSearchType").value=type
+}
+function DrawVideos(List){
+    Videos.innerHTML = `
+    <div class="Search_Par">
+        <input
+            id="VideoSearch"
+            class="searchInput"
+            placeholder="🔍 ابحث...">
+        <select
+            id="VideoSearchType"
+            class="searchFilter">
+            <option value="all">الكل</option>
+            <option value="name">اسم الفيديو</option>
+            <option value="grade">الصف</option>
+        </select>
+        <button
+        class="refreshBtn"
+        onclick="SearchVideos()">
+           🔍 بحث 
+        </button>
+        <span class="counter">
+            العدد : <b>${List.length}</b>
+        </span>
+    </div>
+    <button
+    class="addBtn"
+    onclick="open_add_video()">
+        إضافة فيديو
+    </button>
+    `;
+    List.forEach(video=>{
+        Videos.innerHTML += `
+        <div class="bigcard">
+            <p>${video.name}</p>
+            <button
+            onclick='open_video_detales(${JSON.stringify(video)})'>
+                التفاصيل
+            </button>
+        </div>
+        `;
+    });
+}
+function SearchVideos(){
+    const text =document.getElementById("VideoSearch").value.toLowerCase();
+    const type =document.getElementById("VideoSearchType").value;
+    const Result = VideosCache.filter(video=>{
+        const name =
+        (video.name || "")
+        .toLowerCase();
+        const grade =
+        (video.age || "")
+        .toLowerCase();
+        const code =
+        (video.Hashname || "")
+        .toLowerCase();
+        if(type=="name")
+            return name.includes(text);
+        if(type=="grade")
+            return grade.includes(text);
+        if(type=="code")
+            return code.includes(text);
+        return (
+            name.includes(text) ||
+            grade.includes(text) ||
+            code.includes(text)
+        );
+    });
+    DrawVideos(Result);
+    document.getElementById("VideoSearch").value=text
+    document.getElementById("VideoSearchType").value=type
+}</script>
+</html>
