@@ -622,6 +622,18 @@ body.dark .addBtn:hover{
 #loadingScreen.hide{
     opacity:0;
 }
+#UpdateScreen{
+    position:fixed;
+    inset:0;
+    background:var(--bg);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    z-index:99999999;
+    transition:.5s;
+}
 .loader{
     width:90px;
     height:90px;
@@ -629,6 +641,11 @@ body.dark .addBtn:hover{
     border-top:8px solid var(--primary);
     border-radius:50%;
     animation:spin .8s linear infinite;
+}
+#UpdateScreen h2{
+    color:var(--text);
+    font-size:24px;
+    font-weight:bold;
 }
 #loadingScreen h2{
     color:var(--text);
@@ -1163,6 +1180,241 @@ body.dark .YoutubeCard button{
     transform:translateY(-2px);
     opacity:.9;
 }
+.bigcard{
+    position: relative;
+}
+.request-bell{
+    position: absolute;
+    top: 8px;
+    left: 8px;      /* غيّرها إلى right إذا أردتها في الجهة الأخرى */
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ff2d2d;
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    box-shadow: 0 2px 6px var(--shadow);
+    animation: bellPulse 1s infinite;
+}
+@keyframes bellPulse{
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+.notificationRequest{
+    background:var(--bg);
+    border:2px solid #ffb300;
+    border-radius:15px;
+    padding:15px;
+    margin:20px 0;
+}
+.notificationRequest h3{
+    margin:0 0 10px;
+    color:#ff9800;
+}
+.requestText{
+    margin-bottom:15px;
+}
+.requestButtons{
+    display:flex;
+    gap:10px;
+}
+.acceptBtn{
+    flex:1;
+    background:#4CAF50;
+    color:var(--text);
+}
+.rejectBtn{
+    flex:1;
+    background:#f44336;
+    color:var(--text);
+}
+.requestCard{
+    background:var(--bg);
+    border:1px solid var(--shadow);
+    border-right:6px solid var(--primary);
+    border-radius:16px;
+    padding:18px;
+    margin:20px 0;
+    box-shadow:0 6px 18px var(--shadow);
+    transition:.25s;
+}
+.requestHeader{
+    font-size:22px;
+    font-weight:bold;
+    color:#ffb74d;
+    margin-bottom:18px;
+}
+.requestContent{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:15px;
+    margin-bottom:20px;
+}
+.requestItem{
+    background:var(--bg);
+    border-radius:12px;
+    padding:14px;
+}
+.requestItem span{
+    display:block;
+    color:var(--text);
+    margin-bottom:8px;
+    font-size:14px;
+}
+.requestItem b{
+    color:var(--text);
+    font-size:20px;
+    letter-spacing:1px;
+}
+.requestButtons{
+    display:flex;
+    gap:12px;
+}
+.requestButtons button{
+    flex:1;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.2s;
+}
+.requestButtons button:hover{
+    transform:scale(1.03);
+}
+.acceptBtn{
+    background:#43a047;
+    color:white;
+}
+.acceptBtn:hover{
+    background:#2e7d32;
+}
+.rejectBtn{
+    background:#e53935;
+    color:white;
+}
+.rejectBtn:hover{
+    background:#c62828;
+}
+.requestsTitle{
+    margin:20px 0;
+    font-size:24px;
+    color:var(--text);
+}
+.requestCard{
+    background:var(--bg);
+    border:1px solid var(--shadow);
+    border-right:6px solid var(--primary);
+    border-radius:15px;
+    margin:20px 0;
+    overflow:hidden;
+    box-shadow:0 6px 15px var(--shadow);
+}
+.requestHeader{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:var(--bg);
+    padding:15px 20px;
+    font-size:22px;
+    font-weight:bold;
+    color:var(--text);
+}
+.requestIcon{
+    font-size:28px;
+}
+.requestBody{
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+.requestItem{
+    background:var(--bg);
+    border-radius:12px;
+    padding:15px;
+}
+.requestLabel{
+    display:block;
+    color:var(--text);
+    margin-bottom:10px;
+    font-size:15px;
+}
+.requestValue{
+    display:block;
+    color:var(--text);
+    font-size:22px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+.requestButtons{
+    display:flex;
+    gap:12px;
+    padding:18px;
+    background:var(--bg);
+}
+.requestButtons button{
+    flex:1;
+}
+#ERRORPAGE{
+    position:fixed;
+    inset:0;
+    background:var(--bg);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
+}
+.errorCard{
+    width:min(420px,90%);
+    background:var(--primary);
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+    animation:errorPop .25s ease;
+}
+.errorIcon{
+    font-size:70px;
+    margin-bottom:15px;
+}
+.errorCard h2{
+    margin:0;
+    color:#d32f2f;
+    font-size:28px;
+}
+.errorCard p{
+    margin:20px 0;
+    color:var(--text);
+    line-height:1.7;
+}
+.errorCard button{
+    border:none;
+    border-radius:12px;
+    padding:14px 30px;
+    background:#1976d2;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:.2s;
+}
+.errorCard button:hover{
+    transform:scale(1.05);
+}
+@keyframes errorPop{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
 </style>
 <body dir="rtl">
     <div class="header" id="header">
@@ -1171,10 +1423,14 @@ body.dark .YoutubeCard button{
         <div class="card">🎥 الفيديوهات</div>
         <div class="card">⚙️ الاعدادات</div>
     </div>
-    <div id="loadingScreen">
-        <div class="loader"></div>
-        <h2>جاري تحميل البيانات...</h2>
-    </div>
+        <div id="loadingScreen">
+            <div class="loader"></div>
+            <h2>جاري تحميل البيانات...</h2>
+        </div>
+        <div class="UpdateScreen hide" id="UpdateScreen">
+            <div class="loader"></div>
+            <h2>جاري تحديث النظام...</h2>
+        </div>
     <div class="Students" id="STUPAGE">
         <div class="Search_Par">
             <input type="text" class="searchInput" placeholder="🔍 ابحث...">
@@ -1260,42 +1516,6 @@ body.dark .YoutubeCard button{
             </span>
         </div>
         <button class="addBtn" onclick="open_add_vidio()"> إضافة فيديو </button>
-        <div class="bigcard">
-            <p>اسم الفيديو</p>
-            <button>التفاصيل</button>
-        </div>
-        <div class="bigcard">
-            <p>اسم الفيديو</p>
-            <button>التفاصيل</button>
-        </div>
-        <div class="bigcard">
-            <p>اسم الفيديو</p>
-            <button>التفاصيل</button>
-        </div>
-        <div class="bigcard">
-            <p>اسم الفيديو</p>
-            <button>التفاصيل</button>
-        </div>
-        <div class="bigcard">
-            <p>اسم الفيديو</p>
-            <button>التفاصيل</button>
-        </div>
-        <div class="bigcard">
-            <p>اسم الفيديو</p>
-            <button>التفاصيل</button>
-        </div>
-        <div class="bigcard">
-            <p>اسم الفيديو</p>
-            <button>التفاصيل</button>
-        </div>
-        <div class="bigcard">
-            <p>اسم الفيديو</p>
-            <button>التفاصيل</button>
-        </div>
-        <div class="bigcard">
-            <p>اسم الفيديو</p>
-            <button>التفاصيل</button>
-        </div>
     </div>
     <div id="setting" class="PAGE">
         <div class="settingsBox">
@@ -1318,7 +1538,8 @@ body.dark .YoutubeCard button{
             </div>
             <div class="card" onclick="open_edit_Passw()" id="PasswBtn"> 🔐 تغير كلمه المرور </div>
         </div>
-    </div>    <div class="Editepass hide" id="Editepass">
+    </div>
+    <div class="Editepass hide" id="Editepass">
         <div class="editPassCard">
             <h2>🔑 تغيير كلمة المرور</h2>
             <p>أدخل البيانات التالية</p>
@@ -1413,7 +1634,8 @@ body.dark .YoutubeCard button{
         <button class="saveBtn"id="edit_Student_Button">💾 حفظ الطالب</button>
         <button class="saveBtn" style="background: red;" onclick="cancel_add_student()">❌رجوع</button>
     </div>
-    <div class="student_detales hide" id="student_detales">    </div>
+    <div class="student_detales hide" id="student_detales">
+    </div>
     <div class="editvideo hide" id="editvideo">
         <h2>✏️ تعديل فيديو موجود</h2>
         <input type="text" id="Video_edit_Name" placeholder="اسم الفيديو">
@@ -1473,52 +1695,46 @@ body.dark .YoutubeCard button{
             </div>
         </div>
     </div>
-    <div class="video_detales hide" id="video_detales">    </div>
+    <div class="video_detales hide" id="video_detales">
+    </div>
+    <button
+    style="
+        position:fixed;
+        left:20px;
+        bottom:20px;
+        z-index:999999999;
+        display:flex;
+        align-items:center;
+        gap:10px;
+        padding:15px 22px;
+        border:none;
+        border-radius:40px;
+        background:#25D366;
+        color:white;
+        font-size:18px;
+        font-weight:bold;
+        cursor:pointer;
+        box-shadow:0 8px 20px rgba(0,0,0,.35);"
+    title="الإبلاغ عن مشكلة"
+    onclick="window.open('https://wa.me/201001312208?text='+encodeURIComponent('أواجه مشكلة في التطبيق.\nوصف المشكلة:\n'),'_blank')">
+    💬 الإبلاغ عن مشكلة
+    </button>
+    <div id="ERRORPAGE" style="display:none;">
+        <div class="errorCard">
+            <div class="errorIcon">⚠️</div>
+            <h2>حدث خطأ غير متوقع</h2>
+            <p id="ErrorText">
+                تعذر إكمال العملية.
+            </p>
+            <button onclick="location.reload()">
+                🔄 إعادة تشغيل التطبيق
+            </button>
+        </div>
+    </div>
 </body>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-    const API_KEY = "AIzaSyBPUZwk-YICNLrF2CpVSFrNPb89dppj0HA";
-const CHANNEL_ID = "UC07j1clV9bHSuGht4XsAHgA";
-async function SelectVideo(videoId){
-    const url =`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoId}&key=${API_KEY}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    const video = data.items[0];
-    document.getElementById("Video_URL").value =`https://www.youtube.com/watch?v=${videoId}`;
-    document.getElementById("Video_Name").value =video.snippet.title;
-    const img = document.getElementById("Video_Thumbnail");
-    img.src = video.snippet.thumbnails.high.url;
-    img.style.display = "block";
-    FillDuration(video.contentDetails.duration);
-}
-function FillDuration(iso){
-    const h = +(iso.match(/(\d+)H/) || [0,0])[1];
-    const m = +(iso.match(/(\d+)M/) || [0,0])[1];
-    const s = +(iso.match(/(\d+)S/) || [0,0])[1];
-    document.getElementById("Video_Hours").value = h;
-    document.getElementById("Video_Minutes").value = m;
-    document.getElementById("Video_Seconds").value = s;
-    updateCheckpointText();
-}
-async function LoadYoutubeVideos() {
-    const url =`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&type=video&order=date&maxResults=20`;
-    const response = await fetch(url);
-    const data = await response.json();
-    const container = document.getElementById("YoutubeVideos");
-    container.innerHTML = "";
-    data.items.forEach(video => {
-        container.innerHTML += `
-        <div class="YoutubeCard">
-            <img src="${video.snippet.thumbnails.high.url}">
-            <h3>${video.snippet.title}</h3>
-            <button onclick="SelectVideo('${video.id.videoId}')">
-                اختيار
-            </button>
-        </div>
-        `;
-    });
-}
 const configs = {
     Jee1: {
         apiKey: "AIzaSyAraxHRdTA-JJhgMnabAOJX-QyhRtnBNo8",
@@ -1595,6 +1811,203 @@ const configs = {
         measurementId: "G-Y24224GQ6F"
     },
 };
+const firebaseConfig_JeeMain = {
+    apiKey: "AIzaSyDOvsOinvOuvuXpRXYTodQPW9PuurWaKX4",
+    authDomain: "jeemain-bfaca.firebaseapp.com",
+    projectId: "jeemain-bfaca",
+    storageBucket: "jeemain-bfaca.firebasestorage.app",
+    messagingSenderId: "856241762379",
+    appId: "1:856241762379:web:40f6c0d57fa81c64f81dce",
+    measurementId: "G-FZ0G3CZL14"
+};
+const Password_Controlar=""
+const Chanels_IDS={
+    "1":"-1004453426018",
+    "2":"-1003726483361",
+    "3":"-1003829025110",
+}
+const Join_Chanels_Links={
+    "1":"https://t.me/JeeSystem1",
+    "2":"https://t.me/JeeSystem2",
+    "3":"https://t.me/JeeSystem3",
+}
+EDIT_STUDENT_REQUEST="0c9fe74e-402e-4461-8e14-7a42cb3a3990"
+const version = "1";
+let UPDATE=false
+function Start_UPDATE(){
+    BackUp()
+    UpdateScreen.style.display="flex"
+    setTimeout(function(){
+        UpdateScreen.style.display="none"
+        Adminepass.style.display="flex"
+    }, 5000);
+}
+async function SendTelegramFile(chatId, file, caption = "") {
+    const formData = new FormData();
+    formData.append("chat_id", chatId);
+    formData.append("caption", caption);
+    formData.append("document", file);
+    const response = await fetch(
+        `https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`,
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+    return await response.json();
+}
+function GetBackupFileName(){
+    const now = new Date();
+    const pad = n => String(n).padStart(2,"0");
+    const year = now.getFullYear();
+    const month = pad(now.getMonth()+1);
+    const day = pad(now.getDate());
+    const hour = pad(now.getHours());
+    const minute = pad(now.getMinutes());
+    const second = pad(now.getSeconds());
+    return `Backup_V${version}_DATE(${year}-${month}-${day}_${hour}-${minute}-${second}).json`;
+}
+function ReadDB(dbName){
+    return new Promise((resolve,reject)=>{
+        DB[dbName]
+            .ref("/")
+            .once("value")
+            .then(snapshot=>{
+                let data = snapshot.val();
+                if(data==null){
+                    data={
+                        Students:{},
+                        StudentsInJee_Pointer:0,
+                        free_IDS:[-1],
+                    };
+                }
+                resolve(data);
+            })
+            .catch(reject);
+    });
+}
+function ReadMain(){
+    return new Promise((resolve,reject)=>{
+        JeeMain.ref("/")
+            .once("value")
+            .then(snapshot=>resolve(snapshot.val()))
+            .catch(reject);
+    });
+}
+window.addEventListener("offline", () => {
+    openPage(-1);
+    ErrorText.innerHTML = `
+        <h2>📡 انقطع الاتصال بالإنترنت</h2>
+        <p>
+            يرجى التأكد من اتصالك بالشبكة ثم أعد المحاولة.
+        </p>
+    `;
+    ERRORPAGE.style.display = "flex";
+});
+window.addEventListener("online", () => {
+    if (ERRORPAGE.style.display == "flex") {
+        location.reload();
+    }
+});
+async function BackUp(){
+    try{
+        let UpdateSystem={
+            version:version,
+            Date:new Date().toISOString(),
+            Database:{}
+        };
+        for(const Jee in configs){
+            UpdateSystem.Database[Jee]=await ReadDB(Jee);
+        }
+        UpdateSystem.Database.JeeMain=await ReadMain();
+        const json =
+            JSON.stringify(UpdateSystem,null,4);
+        const file = new File(
+            [json],
+            GetBackupFileName(),
+            {
+                type:"application/json"
+            }
+        );
+        const result=
+            await SendTelegramFile(
+                "5735394288",
+                file,
+                "Database Backup"
+            );
+        console.log(result);
+    }
+    catch(error){
+        await SendTelegramNotification(
+            "5735394288",
+        `❌ Backup Error
+        ${error.message}
+        ${error.stack}`
+        );
+        ShowError(error);
+    }
+}
+function ShowError(error){
+    ErrorText.textContent =
+        error?.message || error || "حدث خطأ غير معروف.";
+    openPage(-1);
+    ERRORPAGE.style.display = "flex";
+}
+function Restore_Backup(backup){
+    if(backup.version !== version){
+        alert("إصدار النسخة الاحتياطية غير مدعوم.");
+        return;
+    }
+    for(const db in backup.Database){
+        if(db === "JeeMain"){
+            SODOwrite(backup.Database[db]);
+        }else{
+            write(db, backup.Database[db]);
+        }
+    }
+    alert("تم استعادة النسخة الاحتياطية بنجاح.");
+}
+const API_KEY = "AIzaSyBPUZwk-YICNLrF2CpVSFrNPb89dppj0HA";
+const CHANNEL_ID = "UC07j1clV9bHSuGht4XsAHgA";
+async function SelectVideo(videoId){
+    const url =`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoId}&key=${API_KEY}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const video = data.items[0];
+    document.getElementById("Video_URL").value =`https://www.youtube.com/watch?v=${videoId}`;
+    document.getElementById("Video_Name").value =video.snippet.title;
+    const img = document.getElementById("Video_Thumbnail");
+    img.src = video.snippet.thumbnails.high.url;
+    img.style.display = "block";
+    FillDuration(video.contentDetails.duration);
+}
+function FillDuration(iso){
+    const h = +(iso.match(/(\d+)H/) || [0,0])[1];
+    const m = +(iso.match(/(\d+)M/) || [0,0])[1];
+    const s = +(iso.match(/(\d+)S/) || [0,0])[1];
+    document.getElementById("Video_Hours").value = h;
+    document.getElementById("Video_Minutes").value = m;
+    document.getElementById("Video_Seconds").value = s;
+    updateCheckpointText();
+}
+async function LoadYoutubeVideos() {
+    const url =`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&type=video&order=date&maxResults=20`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const container = document.getElementById("YoutubeVideos");
+    container.innerHTML = "";
+    data.items.forEach(video => {
+        container.innerHTML += `
+        <div class="YoutubeCard">
+            <img src="${video.snippet.thumbnails.high.url}">
+            <h3>${video.snippet.title}</h3>
+            <button onclick="SelectVideo('${video.id.videoId}')">
+                اختيار
+            </button>
+        </div>
+        `;
+    });
+}
 const BOT_TOKEN = "8636255583:AAG5nLMIHDNfqqaLNAVLbek9x6J9A5OqbZ0";
 async function SendTelegramNotification(chatId, message) {
     const url =`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
@@ -1611,13 +2024,7 @@ async function SendTelegramNotification(chatId, message) {
     });
 }
 async function sendNotification(Grade,Title){
-    let chatId = "";
-    if (Grade == "1")
-        chatId = "-1004453426018";
-    if (Grade == "2")
-        chatId = "-1003726483361";
-    if (Grade == "3")
-        chatId = "-1003829025110";
+    let chatId = Chanels_IDS[Grade];
     await SendTelegramNotification(
         chatId,
     `🎬 فيديو جديد
@@ -1625,15 +2032,6 @@ async function sendNotification(Grade,Title){
     اضغط داخل المنصة للمشاهدة.`
     );
 }
-const firebaseConfig_JeeMain = {
-    apiKey: "AIzaSyDOvsOinvOuvuXpRXYTodQPW9PuurWaKX4",
-    authDomain: "jeemain-bfaca.firebaseapp.com",
-    projectId: "jeemain-bfaca",
-    storageBucket: "jeemain-bfaca.firebasestorage.app",
-    messagingSenderId: "856241762379",
-    appId: "1:856241762379:web:40f6c0d57fa81c64f81dce",
-    measurementId: "G-FZ0G3CZL14"
-};
 const DB = {};
 for (const name in configs) {
     const app = firebase.initializeApp(configs[name], name);
@@ -1696,6 +2094,14 @@ SODOread(function(data){
 })
 let GIL1=false
 let GIL2=false
+function SendWhatsApp(phone, message) {
+    phone = phone.replace(/\D/g, "");
+    if (phone.startsWith("0")) {
+        phone = "20" + phone.substring(1);
+    }
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+}
 const serverCount = Object.keys(configs).length;
 Backend={
     Comunication1:function(name,age,PHN,PPHN,gender){ // add student
@@ -1712,11 +2118,20 @@ Backend={
                 name:name,
                 age:age,
                 code:Server,
+                requested:false,
                 id:Stupoin,
                 parent:String(PPHN),
                 Gender:gender,
                 phone:PHN
             }
+            SendWhatsApp(PHN, `مرحبا بك في منصه استاذ اسامه القليوبي التعليمية
+بياناتك :
+    Code : ${Server}
+    ID : ${Stupoin}
+    Phone : ${PHN}
+لينك التطبيق للدخول علي المنصه حمله و ادخل لمتابعه ما ياتيك:
+https://appho.st/d/pont5DZW
+`)
             write(Server,data)
         })
         now_pointer++
@@ -1739,8 +2154,9 @@ Backend={
             read(Jee, function (data) {
                 if (data && data.Students) {
                     for (const ID in data.Students) {
-                        if (data.Students[ID]==-1){return}
-                        StudentsCache.push(data.Students[ID]);
+                        if (data.Students[ID].name!="-1"){
+                            StudentsCache.push(data.Students[ID]);
+                        }
                     }
                 }
                 LoadedServers++;
@@ -1759,6 +2175,8 @@ Backend={
             data.Students[STUID]={
                 name:name,
                 age:age,
+                requested: data.Students[STUID].requested,
+                requests:data.Students[STUID].requests,
                 code:Server,
                 id:STUID,
                 parent:String(PPHN),
@@ -1770,8 +2188,9 @@ Backend={
     },
     Comunication4:function(Server,Student_ID){ // delete student
         read(Server,function(data){
-            delete data.Students[Student_ID]
-            data.Students[Student_ID]=-1
+            data.Students[Student_ID]={
+                name:"-1",
+            }
             data.free_IDS.push(Student_ID)
             write(Server,data)
         })
@@ -1857,7 +2276,7 @@ Backend={
         }
         for (const jee in configs){
             read(jee,function(data){
-                for (STU in data.Students)
+                for (const STU in data.Students)
                     if (data.Students[STU].age==video.age){
                         if (data.Students[STU].videos==undefined){
                             data.Students[STU].videos={}
@@ -1875,8 +2294,30 @@ Backend={
         SODOread(function(data){
             data.Password=Passw
             SODOwrite(data)
-            SendTelegramNotification("5735394288","new Admen PassWord : "+String(NewPassword.value))
+            SendTelegramNotification("5735394288","new "+Password_Controlar+" Admen PassWord : "+String(NewPassword.value))
             cancel_add_passw()
+        })
+    },
+    Comunication11:function (Jee,STUID,PHN,PPHN,notif){ // edit student DATA
+        read(Jee,function(data){
+            data.Students[STUID].phone=PHN
+            data.Students[STUID].parent=PPHN
+            removeByIndex(data.Students[STUID].requests,data.Students[STUID].requests.findIndex(request => request.notifid === notif));
+            if (data.Students[STUID].requests.length == 0){
+                data.Students[STUID].requested=false
+            }
+            write(Jee,data)
+            open_student_detales(data.Students[STUID])
+        })
+    },
+    Comunication12:function (Jee,STUID,notif){ // regrit Student 
+        read(Jee,function(data){
+            removeByIndex(data.Students[STUID].requests,data.Students[STUID].requests.findIndex(request => request.notifid === notif));
+            if (data.Students[STUID].requests.length == 0){
+                data.Students[STUID].requested=false
+            }
+            write(Jee,data)
+            open_student_detales(data.Students[STUID])
         })
     },
 }
@@ -1948,7 +2389,6 @@ function openPage(index) {
         header.style.display="none"
     }
 }
-openPage(0);
 for (let i=0;i<headerCards.length ;i++){
     headerCards[i].onclick = () => openPage(i);
 }
@@ -2036,7 +2476,8 @@ function cancel_add_passw(){
     NewPassword.value=""
     ConfirmPassword.value=""
     openPage(3);
-}function open_add_video(){
+}
+function open_add_video(){
     openPage(-1)
     addvideo.style.display=("flex")
     LoadYoutubeVideos();
@@ -2105,7 +2546,6 @@ edit_Video_Button.onclick=function(){
 }
 function open_edit_student(stodent){
     openPage(-1)
-    Student_Codee_To_Edit.innerHTML=stodent.code
     Student_edit_name.value=stodent.name
     Student_edit_age.value=stodent.age
     Student_edit_PHN.value=stodent.phone
@@ -2116,12 +2556,72 @@ function open_edit_student(stodent){
     editstudent.style.display=("flex")
 }
 function open_student_detales(student){
+    const examsHTML = DrawStudentExams(student);
+    const videosHTML = DrawStudentVideos(student);
+    const requestsHTML = DrawStudentRequests(student);
+    const studentInfoHTML = DrawStudentInfo(student);
+    const studentButtonsHTML = DrawStudentButtons(student);
+    student_detales.innerHTML = `
+        <div class="studentProfile">
+            ${studentInfoHTML}
+            <hr>`+
+            // <h3 class="requestsTitle">📊 الامتحانات</h3>
+            // ${examsHTML || "<p>لا توجد امتحانات.</p>"}
+            // <hr>
+            `<h3 class="requestsTitle">🎥 الفيديوهات</h3>
+            ${videosHTML || "<p>لا توجد فيديوهات.</p>"}
+            <hr>
+            <h3 class="requestsTitle">📨 الطلبات المعلقة </h3>
+            ${requestsHTML || "<p>لا توجد طلبات معلقة.</p>"}
+            <hr>
+            <div class="studentButtons">
+                ${studentButtonsHTML}
+            </div>
+        </div>
+    `;
+    openPage(-1);
+    student_detales.style.display="block";
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+function DrawStudentInfo(student){
+    let OUTPOT = "";
     const grade = {
         "1":"الأول الثانوي",
         "2":"الثاني الثانوي",
         "3":"الثالث الثانوي"
     }[student.age];
     const gender = student.Gender=="M" ? "👦 ولد" : "👧 بنت";
+    OUTPOT = `
+        <h2>${student.name}</h2>
+        <div class="studentInfo">
+            <div>
+                <b>📱 رقم الطالب :</b><br>
+                ${student.phone}
+            </div>
+            <div>
+                <b>👨‍👩‍👦 ولي الأمر :</b><br>
+                ${student.parent}
+            </div>
+            <div>
+                <b>🎓 الصف :</b><br>
+                ${grade}
+            </div>
+            <div>
+                <b>🚻 النوع :</b><br>
+                ${gender}
+            </div>
+            <div>
+                <b>💻 كود الدخول :</b><br>
+                ${student.code}
+            </div>
+        </div>`
+    return OUTPOT
+}
+function DrawStudentExams(student){
+    let OUTPOT = "";
     let examsHTML = "";
     if(student.exams){
         for(const exam in student.exams){
@@ -2146,6 +2646,11 @@ function open_student_detales(student){
             `;
         }
     }
+    OUTPOT=examsHTML
+    return OUTPOT
+}
+function DrawStudentVideos(student){
+    let OUTPOT = "";
     let videosHTML = "";
     if(student.videos){
         for(const video in student.videos){
@@ -2186,73 +2691,109 @@ function open_student_detales(student){
             `;
         }
     }
-    student_detales.innerHTML = `
-        <div class="studentProfile">
-            <h2>${student.name}</h2>
-            <div class="studentInfo">
-                <div>
-                    <b>📱 رقم الطالب :</b><br>
-                    ${student.phone}
+    OUTPOT=videosHTML
+    return OUTPOT
+}
+function DrawStudentRequests(student){
+    let OUTPOT = "";
+    if(
+        !student.requested ||
+        !Array.isArray(student.requests) ||
+        student.requests.length === 0
+    ){
+        return "";
+    }
+    student.requests.forEach(request=>{
+        if(request.Type === EDIT_STUDENT_REQUEST){
+            OUTPOT += `
+                <div class="requestCard">
+                    <div class="requestHeader">
+                        <span class="requestIcon">✏️</span>
+                        <span class="requestName">
+                            طلب تعديل بيانات الطالب
+                        </span>
+                    </div>
+                    <div class="requestBody">
+                        <div class="requestItem">
+                            <span class="requestLabel">
+                                📱 رقم الطالب الجديد
+                            </span>
+                            <span class="requestValue">
+                                ${request.phone}
+                            </span>
+                        </div>
+                        <div class="requestItem">
+                            <span class="requestLabel">
+                                👨‍👩‍👦 رقم ولي الأمر الجديد
+                            </span>
+                            <span class="requestValue">
+                                ${request.pphone}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="requestButtons">
+                        <button
+                            class="acceptBtn"
+                            onclick="Backend.Comunication11(
+                                '${student.code}',
+                                '${student.id}',
+                                '${request.phone}',
+                                '${request.pphone}',
+                                '${request.notifid}'
+                            )">
+                            ✅ موافقة
+                        </button>
+                        <button
+                            class="rejectBtn"
+                            onclick="Backend.Comunication12(
+                                '${student.code}',
+                                '${student.id}',
+                                '${request.notifid}'
+                            )">
+                            ❌ رفض
+                        </button>
+                    </div>
                 </div>
-                <div>
-                    <b>👨‍👩‍👦 ولي الأمر :</b><br>
-                    ${student.parent}
-                </div>
-                <div>
-                    <b>🎓 الصف :</b><br>
-                    ${grade}
-                </div>
-                <div>
-                    <b>🚻 النوع :</b><br>
-                    ${gender}
-                </div>
-                <div>
-                    <b>💻 كود الدخول :</b><br>
-                    ${student.code}
-                </div>
-            </div>
-            <hr>
-            <h3>📊 الامتحانات</h3>
-            ${examsHTML || "<p>لا توجد امتحانات.</p>"}
-            <hr>
-            <h3>🎥 الفيديوهات</h3>
-            ${videosHTML || "<p>لا توجد فيديوهات.</p>"}
-            <hr>
-            <div class="studentButtons">
-                <button
-                    class="waBtn"
-                    onclick="window.open('https://wa.me/2${student.phone}')">
-                    <img src="https://raw.githubusercontent.com/mrosamavidiosystem-tech/AdminePAGE/refs/heads/main/image.png"> واتساب
-                </button>
-                <button
-                    class="msgBtn hide"
-                    onclick="open_student_chat('${student.phone}')">
-                    💻 محادثة
-                </button>
-                <button
-                    class="editBtn"
-                    onclick='open_edit_student(${JSON.stringify(student)})'>
-                    ✏ تعديل
-                </button>
-                <button
-                    class="deleteBtn"
-                    onclick="Backend.Comunication4('${student.code}','${student.id}')">
-                    🗑 حذف
-                </button>
-                <button
-                    class="backBtn"
-                    onclick="openPage(0)">
-                    ↩ رجوع
-                </button>
-            </div>
-        </div>
-    `;
-    openPage(-1);
-    student_detales.style.display="block";
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+            `;
+        }
     });
+    return OUTPOT;
+}
+function removeByIndex(list, index) {
+    if (index >= 0 && index < list.length) {
+        list.splice(index, 1);
+    }
+}
+function DrawStudentButtons(student){
+    let OUTPOT = "";
+    OUTPOT = `
+        <button
+            class="waBtn"
+            onclick="window.open('https://wa.me/2${student.phone}')">
+            <img src="https://raw.githubusercontent.com/mrosamavidiosystem-tech/AdminePAGE/refs/heads/main/image.png"> واتساب
+        </button>
+        <button
+            class="msgBtn hide"
+            onclick="open_student_chat('${student.phone}')">
+            💻 محادثة
+        </button>
+        <button
+            class="editBtn"
+            onclick='open_edit_student(${JSON.stringify(student)})'>
+            ✏ تعديل
+        </button>
+        <button
+            class="deleteBtn"
+            onclick="Backend.Comunication4('${student.code}','${student.id}')">
+            🗑 حذف
+        </button>
+        <button
+            class="backBtn"
+            onclick="openPage(0)">
+            ↩ رجوع
+        </button>
+    `;
+    return OUTPOT
 }
 function getYoutubeID(url){
     const reg =/^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -2276,7 +2817,8 @@ function open_edit_video(video){
 function open_edit_Passw(){
     openPage(-1)
     Editepass.style.display="flex"
-}function open_video_detales(video) {
+}
+function open_video_detales(video) {
     openPage(-1);
     const page = document.getElementById("video_detales");
     page.style.display="flex"
@@ -2455,7 +2997,12 @@ function Start_App(){
     Backend.Comunication2()
     Backend.Comunication6()
     loadingScreen.style.display="none"
-    Adminepass.style.display="flex"
+    if (UPDATE==true){
+        Start_UPDATE()
+    }
+    else{
+        Adminepass.style.display="flex"
+    }
 }
 openPage(-1)
 setTimeout(Start_App,5000)
@@ -2505,7 +3052,7 @@ document.getElementById("Video_Minutes").addEventListener("input", updateCheckpo
 document.getElementById("Video_Seconds").addEventListener("input", updateCheckpointText);
 document.getElementById("Video_CP_len").addEventListener("input", updateCheckpointText);
 document.getElementById("Each_edit_CP_After").addEventListener("input", updateEditCheckpointText);
-function DrawStudents(List){
+function DrawStudents(List) {
     STUPAGE.innerHTML = `
     <div class="Search_Par">
         <input type="text"
@@ -2520,7 +3067,7 @@ function DrawStudents(List){
             <option value="gender">النوع</option>
         </select>
         <button class="refreshBtn"
-        onclick="SearchStudents()">
+                onclick="SearchStudents()">
             🔍 بحث
         </button>
         <span class="counter">
@@ -2528,24 +3075,54 @@ function DrawStudents(List){
         </span>
     </div>
     <button class="addBtn"
-    onclick="open_add_student()">
+            onclick="open_add_student()">
         إضافة طالب
     </button>
     `;
-    List.forEach(student=>{
-        let color="#8ECA3C";
-        if(student.Gender=="F")
-            color="#FFB6A6";
+    List.forEach(student => {
+        let color = "#8ECA3C";
+        if (student.Gender == "F")
+            color = "#FFB6A6";
         STUPAGE.innerHTML += `
-        <div class="bigcard">
+        <div class="bigcard" style="position:relative;">
+            ${student.requested === true ? `
+                <span onclick='open_student_detales(${JSON.stringify(student)})' style="
+                    position:absolute;
+                    top:8px;
+                    left:8px;
+                    width:26px;
+                    height:26px;
+                    border-radius:50%;
+                    background:#e53935;
+                    color:white;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    font-size:15px;
+                    box-shadow:0 2px 6px rgba(0,0,0,.3);
+                    animation:bellPulse 1s infinite;
+                ">🔔</span>
+            ` : ""}
             <p>${student.name}</p>
             <button
-            style="background:${color}"
-            onclick='open_student_detales(${JSON.stringify(student)})'>
+                style="background:${color}"
+                onclick='open_student_detales(${JSON.stringify(student)})'>
                 التفاصيل
             </button>
         </div>`;
     });
+    if (!document.getElementById("BellAnimationStyle")) {
+        const style = document.createElement("style");
+        style.id = "BellAnimationStyle";
+        style.innerHTML = `
+            @keyframes bellPulse{
+                0%{transform:scale(1);}
+                50%{transform:scale(1.15);}
+                100%{transform:scale(1);}
+            }
+        `;
+        document.head.appendChild(style);
+    }
 }
 function SearchStudents(){
     const text =document.getElementById("StudentSearch").value.toLowerCase();
@@ -2640,5 +3217,6 @@ function SearchVideos(){
     DrawVideos(Result);
     document.getElementById("VideoSearch").value=text
     document.getElementById("VideoSearchType").value=type
-}</script>
+}
+</script>
 </html>
