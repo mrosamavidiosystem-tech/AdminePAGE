@@ -1,5 +1,5 @@
 const version = "1";
-UPDATE=false
+let UPDATE = false;
 function Start_UPDATE(){
     BackUp()
     UpdateScreen.style.display="flex"
